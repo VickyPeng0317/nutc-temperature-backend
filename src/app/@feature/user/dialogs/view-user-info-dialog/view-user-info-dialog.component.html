@@ -1,0 +1,13 @@
+<nb-card style="width: 400px">
+  <nb-card-header>
+    <h5>使用者詳細</h5>
+  </nb-card-header>
+  <nb-card-body>
+    <div fxLayout="column" fxLayoutGap="10px">
+      <span>帳號: {{ userInfo.account }} </span>
+    </div>
+  </nb-card-body>
+  <nb-card-footer fxLayoutAlign="end center" fxLayoutGap="5px">
+    <button (click)="close()" status="basic" nbButton>關閉</button>
+  </nb-card-footer>
+</nb-card>

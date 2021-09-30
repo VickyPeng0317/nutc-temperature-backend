@@ -1,0 +1,24 @@
+<div class="nb-theme-default login-bg" fxLayoutAlign="center" style="height: 100vh; margin: 0;">
+  <div fxFlex="30" fxFlex.sm="40" fxFlex.lg="40" fxFlex.md="40" fxFlex.xs="90" class="login-card">
+    <nb-card>
+      <nb-card-body>
+        <div class="login-header" fxLayoutAlign="center">
+          <h3>智慧農場後台</h3>
+        </div>
+        <form [formGroup]="form" class="login-form" fxLayout="column" fxLayoutGap="20px">
+          <div class="form-control">
+            <label class="label"><nb-icon icon="person"></nb-icon> 帳號</label>
+            <input type="text" formControlName="account" nbInput fullWidth placeholder="請輸入帳號">
+          </div>
+          <div class="form-control">
+            <label class="label"><nb-icon icon="lock"></nb-icon> 密碼</label>
+            <input type="password" formControlName="password" nbInput fullWidth placeholder="請輸入密碼">
+          </div>
+          <div class="login-action">
+            <button type="submit" (click)="login()" fullWidth nbButton status="success">登入</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

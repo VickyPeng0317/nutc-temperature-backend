@@ -1,0 +1,41 @@
+.card-header {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.form-body {
+  height: 70vh;
+  overflow: auto;
+  padding-right: 15px;
+  padding-top: 5px;
+  .form-control {
+    label {
+      font-size: 17px;
+      display: block;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.chart-card {
+  padding: 0 15px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

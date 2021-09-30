@@ -1,0 +1,16 @@
+<nb-card status="primary">
+  <nb-card-header>
+    <nb-icon icon="droplet"></nb-icon> 濕度圖表
+  </nb-card-header>
+  <nb-card-body>
+    <div style="display: block;width: 100%;">
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+      </canvas>
+    </div>
+  </nb-card-body>
+</nb-card>

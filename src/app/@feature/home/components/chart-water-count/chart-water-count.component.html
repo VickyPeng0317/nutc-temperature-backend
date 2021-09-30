@@ -1,0 +1,17 @@
+<nb-card status="success">
+  <nb-card-header>
+    <nb-icon icon="options-2-outline"></nb-icon>
+    加水次數圖表
+  </nb-card-header>
+  <nb-card-body>
+    <div style="display: block;width: 100%;">
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+      </canvas>
+    </div>
+  </nb-card-body>
+</nb-card>

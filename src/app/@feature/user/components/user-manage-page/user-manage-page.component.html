@@ -1,0 +1,54 @@
+<nb-card accent="primary">
+  <nb-card-header fxLayoutAlign="space-between center">
+    <h4>使用者管理</h4>
+    <button (click)="openCreateUserDialog()" status="success" nbButton><nb-icon icon="plus-outline"></nb-icon>新增使用者</button>
+  </nb-card-header>
+</nb-card>
+
+<nb-card accent="info">
+  <nb-card-body [formGroup]="searchForm" fxLayout="row wrap" fxLayoutGap="10px">
+    <div class="form-control" fxFlex="25" fxFlex.sm="100"  fxFlex.xs="100">
+      <label class="label">帳號</label>
+      <input formControlName="account" type="text" nbInput fullWidth placeholder="請輸入帳號">
+    </div>
+    <div class="form-control" fxFlex="25" fxFlex.sm="100"  fxFlex.xs="100">
+      <label class="label">姓名</label>
+      <input formControlName="name" type="text" nbInput fullWidth placeholder="請輸入姓名">
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<nb-card accent="success">
+  <nb-card-body>
+    <div>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th *ngFor="let col of columnList">
+              {{ col.name }}
+            </th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of userList; index as i">
+            <td>{{ i + 1 }}</td>
+            <td *ngFor="let col of columnList">
+              <ng-container [ngSwitch]="col.key">
+                <ng-container *ngSwitchDefault>
+                  {{ data[col.key] || '無' }}
+                </ng-container>
+              </ng-container>
+            </td>
+            <td fxLayoutGap="5px">
+              <button status="basic" nbButton>檢視</button>
+              <button (click)="openEditUserDialog(data.id)" status="primary" nbButton>編輯</button>
+              <button (click)="deleteUser(data.id)" status="danger" nbButton>刪除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </nb-card-body>
+</nb-card>

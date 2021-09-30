@@ -1,0 +1,19 @@
+.login-bg {
+  height: 100vh;
+  background: linear-gradient(#007979, rgb(0,153,78));
+  // background: url(/assets/login.jpg) center center / cover no-repeat fixed;
+}
+
+.login-card {
+  margin-top: 25vh;
+  .login-form {
+    .form-control .label {
+      font-size: 18px;
+      margin-bottom: 10px;
+      display: block;
+    }
+  }
+  .login-action {
+    margin: 2rem 0;
+  }
+}
