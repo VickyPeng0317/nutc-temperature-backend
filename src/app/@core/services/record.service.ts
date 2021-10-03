@@ -15,6 +15,7 @@ export class RecordService {
       id:1,
       userId: 1,
       userName: '王大明',
+      userAccount: '1710932013',
       deviceId: 1,
       deviceName: '體溫裝置01',
       temperature: '36.5',
@@ -29,6 +30,7 @@ export class RecordService {
       id:1,
       userId: 1,
       userName: '王大明',
+      userAccount: '1710932013',
       deviceId: 1,
       deviceName: '體溫裝置01',
       temperature: '36.5',
@@ -43,6 +45,7 @@ export interface IRecordInfo {
   id: number;
   userId: number;
   userName: string;
+  userAccount: string;
   deviceId: number;
   deviceName: string;
   temperature: string;

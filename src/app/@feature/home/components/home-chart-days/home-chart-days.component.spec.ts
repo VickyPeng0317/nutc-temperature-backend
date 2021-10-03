@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TemperatureChartComponent } from './temperature-chart.component';
+import { HomeChartDaysComponent } from './home-chart-days.component';
 
-describe('TemperatureChartComponent', () => {
-  let component: TemperatureChartComponent;
-  let fixture: ComponentFixture<TemperatureChartComponent>;
+describe('HomeChartDaysComponent', () => {
+  let component: HomeChartDaysComponent;
+  let fixture: ComponentFixture<HomeChartDaysComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TemperatureChartComponent ]
+      declarations: [ HomeChartDaysComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TemperatureChartComponent);
+    fixture = TestBed.createComponent(HomeChartDaysComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

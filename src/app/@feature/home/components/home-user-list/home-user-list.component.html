@@ -1,0 +1,23 @@
+<nb-card status="info">
+    <nb-badge text="99+" status="danger" position="top left"></nb-badge>
+    <nb-card-header style="font-size: 20px;">
+        <nb-icon icon="person"></nb-icon>
+        今日超標名單 (總數:15)
+    </nb-card-header>
+    <nb-card-body >
+        <nb-list style="height: 300px;">
+            <nb-list-item fxLayout="row">
+                <div fxFlex="20%" style="font-weight: bold;">使用者帳號</div>
+                <div fxFlex="20%" style="font-weight: bold;">使用者名稱</div>
+                <div fxFlex="30%" style="font-weight: bold;">設備名稱</div>
+                <div fxFlex="30%" style="font-weight: bold;">時間</div>
+            </nb-list-item>
+            <nb-list-item fxLayout="row" *ngFor="let record of recordList">
+                <div fxFlex="20%">{{ record.userAccount }}</div>
+                <div fxFlex="20%">{{ record.userName }}</div>
+                <div fxFlex="30%">{{ record.deviceName }}</div>
+                <div fxFlex="30%">{{ record.createdTime | date:'HH:mm:ss' }}</div>
+            </nb-list-item>
+          </nb-list>
+    </nb-card-body>
+</nb-card>

@@ -3,7 +3,7 @@
     <nb-card>
       <nb-card-body>
         <div class="login-header" fxLayoutAlign="center">
-          <h3>智慧農場後台</h3>
+          <h3>NUTC 體溫感測後臺</h3>
         </div>
         <form [formGroup]="form" class="login-form" fxLayout="column" fxLayoutGap="20px">
           <div class="form-control">
@@ -15,7 +15,7 @@
             <input type="password" formControlName="password" nbInput fullWidth placeholder="請輸入密碼">
           </div>
           <div class="login-action">
-            <button type="submit" (click)="login()" fullWidth nbButton status="success">登入</button>
+            <button type="submit" (click)="login()" fullWidth nbButton status="info">登入</button>
           </div>
         </form>
       </nb-card-body>

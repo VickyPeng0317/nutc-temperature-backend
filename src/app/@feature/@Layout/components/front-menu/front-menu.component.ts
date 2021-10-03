@@ -24,7 +24,7 @@ export class FrontMenuComponent implements OnInit {
       link: 'user'
     },
     {
-      title: '辨識紀錄管理',
+      title: '辨識記錄查詢',
       icon: 'thermometer',
       link: 'record'
     }
