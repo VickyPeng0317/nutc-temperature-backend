@@ -15,12 +15,18 @@ const routes: Routes = [
     loadChildren: () =>
       import('./user-page/user-page.module').then(m => m.UserPageModule),
   },
-    // 任務
-    {
-      path: 'device',
-      loadChildren: () =>
-        import('./device-page/device-page.module').then(m => m.DevicePageModule),
-    },
+  // 裝置
+  {
+    path: 'device',
+    loadChildren: () =>
+      import('./device-page/device-page.module').then(m => m.DevicePageModule),
+  },
+  // 紀錄
+  {
+    path: 'record',
+    loadChildren: () =>
+      import('./record-page/record-page.module').then(m => m.RecordPageModule),
+  },
   {
     path: '',
     redirectTo: 'home',

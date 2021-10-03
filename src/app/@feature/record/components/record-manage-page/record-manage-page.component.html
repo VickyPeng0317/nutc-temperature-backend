@@ -1,0 +1,47 @@
+<nb-card accent="primary">
+  <nb-card-header fxLayoutAlign="space-between center">
+    <h4>辨識記錄管理</h4>
+  </nb-card-header>
+</nb-card>
+
+<nb-card accent="info">
+  <nb-card-body fxLayout="row wrap" fxLayoutGap="10px">
+    <div class="form-control" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
+      <label class="label">使用者名稱</label>
+      <input type="text" nbInput fullWidth placeholder="請輸入使用者名稱">
+    </div>
+    <div class="form-control" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
+      <label class="label">機器名稱</label>
+      <input type="text" nbInput fullWidth placeholder="請輸入機器名稱">
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<nb-card accent="success">
+  <nb-card-body>
+    <div>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th *ngFor="let col of columnList">
+              {{ col.name }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of recordList; index as i">
+            <td>{{ i + 1 }}</td>
+            <td *ngFor="let col of columnList">
+              <ng-container [ngSwitch]="col.key">
+                <ng-container *ngSwitchDefault>
+                  {{ data[col.key] || '無' }}
+                </ng-container>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </nb-card-body>
+</nb-card>

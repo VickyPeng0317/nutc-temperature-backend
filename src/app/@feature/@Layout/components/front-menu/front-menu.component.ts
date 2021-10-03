@@ -14,14 +14,19 @@ export class FrontMenuComponent implements OnInit {
       link: 'home'
     },
     {
-      title: '使用者',
+      title: '裝置管理',
+      icon: 'speaker',
+      link: 'device'
+    },
+    {
+      title: '使用者管理',
       icon: 'person',
       link: 'user'
     },
     {
-      title: '裝置',
-      icon: 'speaker',
-      link: 'device'
+      title: '辨識紀錄管理',
+      icon: 'thermometer',
+      link: 'record'
     }
   ];
   constructor() { }
