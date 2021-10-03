@@ -15,6 +15,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./user-page/user-page.module').then(m => m.UserPageModule),
   },
+    // 任務
+    {
+      path: 'device',
+      loadChildren: () =>
+        import('./device-page/device-page.module').then(m => m.DevicePageModule),
+    },
   {
     path: '',
     redirectTo: 'home',

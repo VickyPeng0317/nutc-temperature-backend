@@ -1,0 +1,52 @@
+<nb-card style="width: 400px" [status]="!!id ? 'primary' : 'success'">
+    <nb-card-header>
+        <h5>
+            {{ !!id ? '編輯裝置' : '新增裝置' }}
+        </h5>
+    </nb-card-header>
+    <nb-card-body>
+        <div [formGroup]="form" fxLayout="column" fxLayoutGap="10px">
+            <div class="form-control">
+                <label class="lable">名稱</label>
+                <form-required></form-required>
+                <input formControlName="name" fullWidth nbInput placeholder="請輸入名稱">
+            </div>
+            <div class="form-control">
+                <label class="lable">機型</label>
+                <form-required></form-required>
+                <input formControlName="deviceCode" fullWidth nbInput placeholder="請輸入機型">
+            </div>
+            <div class="form-control">
+                <label class="lable">位置</label>
+                <form-required></form-required>
+                <input formControlName="place" fullWidth nbInput placeholder="請輸入位置">
+            </div>
+            <div class="form-control">
+                <label class="lable">維修單位</label>
+                <form-required></form-required>
+                <input formControlName="maintainOrganization" fullWidth nbInput placeholder="請輸入維修單位">
+            </div>
+            <div class="form-control">
+                <label class="lable">維修專線</label>
+                <input formControlName="maintainCall"fullWidth nbInput placeholder="請輸入維修專線">
+            </div>
+            <div class="form-control">
+                <label class="lable">狀態</label>
+                <form-required></form-required>
+                <nb-select formControlName="status" fullWidth placeholder="請輸入狀態">
+                    <nb-option value="啟用">啟用</nb-option>
+                    <nb-option value="停用">停用</nb-option>
+                </nb-select>
+            </div>
+            <div class="form-control">
+                <label class="lable">辨識方式</label>
+                <form-required></form-required>
+                <input formControlName="type" fullWidth nbInput placeholder="請輸入辨識方式">
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer fxLayoutAlign="end center" fxLayoutGap="5px">
+        <button [disabled]="form.invalid" (click)="send()" status="primary" nbButton>送出</button>
+        <button (click)="close()" status="basic" nbButton>取消</button>
+    </nb-card-footer>
+</nb-card>

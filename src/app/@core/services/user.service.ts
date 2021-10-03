@@ -23,7 +23,7 @@ export class UserService extends BaseService{
           account: '1710932013',
           password: 1,
           department: '資工系',
-          email: '2021-03-02',
+          email: 'test@gmail.com',
         },
         {
           id: 2,
@@ -31,7 +31,7 @@ export class UserService extends BaseService{
           account: '1710932014',
           password: 1,
           department: '資管系',
-          email: '2021-03-02',
+          email: 'test@gmail.com',
         },        
         {
           id: 3,
@@ -39,7 +39,7 @@ export class UserService extends BaseService{
           account: '1710932015',
           password: 1,
           department: '企管系',
-          email: '2021-03-02',
+          email: 'test@gmail.com',
         },
       ]
     });
@@ -75,7 +75,7 @@ export class UserService extends BaseService{
         account: '1710932013',
         password: 1,
         department: '資工系',
-        email: '2021-03-02',
+        email: 'test@gmail.com',
       },
     });
   }

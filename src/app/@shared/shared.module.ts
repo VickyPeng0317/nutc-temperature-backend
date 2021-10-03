@@ -10,6 +10,7 @@ import { zhTW } from 'date-fns/locale';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
 import { RequiredFormDirective } from './directives/required-form.directive';
 import { ChartsModule } from 'ng2-charts';
+import { FormRequiredComponent } from './components/form-required/form-required.component';
 
 const NB_MODEL = [
   NbCardModule,
@@ -46,9 +47,14 @@ const DIRECTIVES = [
   RequiredFormDirective
 ];
 
+const COMPONENTS = [
+  FormRequiredComponent
+];
+
 @NgModule({
   declarations: [
-    ...DIRECTIVES
+    ...DIRECTIVES,
+    ...COMPONENTS
   ],
   imports: [
     CommonModule,
@@ -62,7 +68,8 @@ const DIRECTIVES = [
     FlexLayoutModule,
     ChartsModule,
     ...NB_MODEL,
-    ...DIRECTIVES
+    ...DIRECTIVES,
+    ...COMPONENTS
   ]
 })
 export class SharedModule { }

@@ -17,6 +17,11 @@ export class FrontMenuComponent implements OnInit {
       title: '使用者',
       icon: 'person',
       link: 'user'
+    },
+    {
+      title: '裝置',
+      icon: 'speaker',
+      link: 'device'
     }
   ];
   constructor() { }
