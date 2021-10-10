@@ -10,7 +10,7 @@ import { NbDialogRef } from '@nebular/theme';
 })
 export class ViewUserInfoDialogComponent implements OnInit {
   @Input()
-  id: number;
+  account: string;
   userInfo: IUserListItem = <IUserListItem>{};
   constructor(
     private userService: UserService,
@@ -18,15 +18,15 @@ export class ViewUserInfoDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.id;
-    this.userService.getUserInfo({id}).subscribe(res => {
-      const isSuccess = res.msg !== 'file';
+    const account = this.account;
+    this.userService.getUserInfo({ account }).subscribe(res => {
+      const isSuccess = !res.msg;
       if (!isSuccess) {
         alert('取得失敗');
         this.dialogRef.close();
         return;
       }
-      this.userInfo = res.data;
+      this.userInfo = res;
     });
   }
 

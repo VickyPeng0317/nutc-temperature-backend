@@ -56,11 +56,7 @@ export class UserManagePageComponent implements OnInit {
     this.userList = [];
     const params = this.searchForm.getRawValue();
     this.userService.getUserList(params).subscribe(res => {
-      const isSuccess = res.msg !== 'fail';
-      if (!isSuccess) {
-        return;
-      }
-      this.userList = res.data;
+      this.userList = res;
     });
   }
 
@@ -73,9 +69,9 @@ export class UserManagePageComponent implements OnInit {
     });
   }
 
-  openEditUserDialog(id: number) {
+  openEditUserDialog(account: string) {
     const dialogData = {
-      context: { id }
+      context: { account }
     };
     this.dialogService.open(ModifyUserDialogComponent, dialogData).onClose.subscribe(res => {
       if (!res) {
@@ -87,7 +83,7 @@ export class UserManagePageComponent implements OnInit {
 
   createUser(params: ICreateUserReq) {
     this.userService.createUser(params).subscribe(res => {
-      const isSuccess = res.msg !== 'fail';
+      const isSuccess = !res.msg;
       if (!isSuccess) {
         return alert('新增失敗');
       }
@@ -98,7 +94,7 @@ export class UserManagePageComponent implements OnInit {
 
   editUser(params: IEditUserReq) {
     this.userService.editUser(params).subscribe(res => {
-      const isSuccess = res.msg !== 'fail';
+      const isSuccess = !res.msg;
       if (!isSuccess) {
         return alert('編輯失敗');
       }
@@ -112,8 +108,8 @@ export class UserManagePageComponent implements OnInit {
     if (!isDelete) {
       return;
     }
-    this.userService.deleteUser({ id }).subscribe(res => {
-      const isSuccess = res.msg !== 'fail';
+    this.userService.deleteUser({ id: id.toString() }).subscribe(res => {
+      const isSuccess = !res.msg;
       if (!isSuccess) {
         return alert('刪除失敗');
       }

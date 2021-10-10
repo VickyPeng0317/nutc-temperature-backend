@@ -5,7 +5,7 @@
 export const environment = {
   isMock: true,
   production: false,
-  apiUrl: 'http://163.17.136.70:8080'
+  apiUrl: 'http://127.0.0.1'
 };
 
 /*

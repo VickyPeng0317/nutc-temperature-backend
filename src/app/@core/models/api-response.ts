@@ -3,3 +3,9 @@ export interface IApiResult<T> {
   msg: string;
   data: T;
 }
+
+export interface IApiRes {
+  code: string;
+  msg: string;
+}
+

@@ -10,9 +10,10 @@ import { NbDialogRef } from '@nebular/theme';
 })
 export class ModifyUserDialogComponent implements OnInit {
   @Input()
-  id: number;
+  account: string;
   isEdit: boolean;
   form = new FormGroup({
+    id: new FormControl(''),
     name: new FormControl('', Validators.required),
     account: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
@@ -25,27 +26,26 @@ export class ModifyUserDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isEdit = !!this.id;
+    this.isEdit = !!this.account;
     if (!this.isEdit) {
       return;
     }
-    this.setEditForm(this.id);
+    this.setEditForm(this.account);
   }
 
-  setEditForm(id: number) {
-    this.userService.getUserInfo({ id }).subscribe(res => {
-      const isSuccess = res.msg !== 'fail';
+  setEditForm(account: string) {
+    this.userService.getUserInfo({ account }).subscribe(res => {
+      const isSuccess = !res.msg;
       if (!isSuccess) {
         return;
       }
-      const userInfo = res.data;
+      const userInfo = res;
       this.form.patchValue(userInfo);
     });
   }
 
   send() {
     const res = {
-      id: this.id,
       ...this.form.getRawValue()
     };
     this.dialogRef.close(res);
