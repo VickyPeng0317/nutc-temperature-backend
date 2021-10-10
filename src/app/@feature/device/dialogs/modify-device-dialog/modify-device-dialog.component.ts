@@ -10,8 +10,9 @@ import { NbDialogRef } from '@nebular/theme';
 })
 export class ModifyDeviceDialogComponent implements OnInit {
   @Input()
-  id?: number;
+  deviceCode?: string;
   form = new FormGroup({
+    id: new FormControl(''),
     name: new FormControl('', Validators.required),
     deviceCode: new FormControl('', Validators.required),
     place: new FormControl('', Validators.required),
@@ -26,15 +27,15 @@ export class ModifyDeviceDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const isEdit = !!this.id;
+    const isEdit = !!this.deviceCode;
     if (!isEdit) {
       return;
     }
-    this.setEditForm(this.id);
+    this.setEditForm(this.deviceCode);
   }
 
-  setEditForm(id: number) {
-    this.deviceService.getDeviceInfo(id).subscribe(res => {
+  setEditForm(deviceCode: string) {
+    this.deviceService.getDeviceInfo(deviceCode).subscribe(res => {
       const deviceInfo = res;
       this.form.patchValue(deviceInfo);
     });
@@ -42,7 +43,6 @@ export class ModifyDeviceDialogComponent implements OnInit {
 
   send() {
     const res = {
-      id: this.id,
       ...this.form.getRawValue()
     };
     this.dialogRef.close(res);

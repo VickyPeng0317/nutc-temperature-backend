@@ -52,19 +52,41 @@ export class DeviceManagePageComponent implements OnInit {
       if (!res) {
         return;
       }
-      // this.createDevice(res);
+      this.createDevice(res);
     });
   }
 
-  openEditDialog(id: number) {
+  openEditDialog(deviceCode: string) {
     const dialogData = {
-      context: { id }
+      context: { deviceCode }
     };
     this.dialogService.open(ModifyDeviceDialogComponent, dialogData).onClose.subscribe(res => {
       if (!res) {
         return;
       }
-      // this.editDevice(res);
+      this.editDevice(res);
+    });
+  }
+
+  createDevice(params) {
+    this.deviceService.createDevice(params).subscribe(res => {
+      const isSuccess = !res.msg;
+      if (!isSuccess) {
+        return alert('新增失敗');
+      }
+      alert('新增成功');
+      this.getDeviceList();
+    });
+  }
+
+  editDevice(params) {
+    this.deviceService.editDevice(params).subscribe(res => {
+      const isSuccess = !res.msg;
+      if (!isSuccess) {
+        return alert('編輯失敗');
+      }
+      alert('編輯成功');
+      this.getDeviceList();
     });
   }
 
@@ -73,7 +95,15 @@ export class DeviceManagePageComponent implements OnInit {
     if (!isDelete) {
       return;
     }
-    this.deviceList = this.deviceList.filter(x => x.id !== id);
+    // this.deviceList = this.deviceList.filter(x => x.id !== id);
+    this.deviceService.deleteDevice(id.toString()).subscribe(res => {
+      const isSuccess = !res.msg;
+      if (!isSuccess) {
+        return alert('刪除失敗');
+      }
+      alert('刪除成功');
+      this.getDeviceList();
+    });
   }
 
 }
