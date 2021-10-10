@@ -34,6 +34,9 @@
             <td>{{ i + 1 }}</td>
             <td *ngFor="let col of columnList">
               <ng-container [ngSwitch]="col.key">
+                <ng-container *ngSwitchCase="'createdTime'">
+                  {{ data.createdTime | date: 'YYYY/MM/dd HH:mm:ss'}}
+                </ng-container>
                 <ng-container *ngSwitchDefault>
                   {{ data[col.key] || '無' }}
                 </ng-container>
