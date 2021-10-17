@@ -5,7 +5,8 @@
 export const environment = {
   isMock: true,
   production: false,
-  apiUrl: 'http://127.0.0.1'
+  apiUrl: 'http://127.0.0.1',
+  nutcApi: 'https://dsl2501_70.nutc.edu.tw:5053/NutcTempApi'
 };
 
 /*
