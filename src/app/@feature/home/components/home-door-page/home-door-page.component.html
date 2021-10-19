@@ -1,0 +1,38 @@
+<div>
+    <nb-tabset>
+        <nb-tab tabTitle="三民校區大門">
+            <div fxLayout="row wrap">
+                <div class="device-card" fxFlex="50" *ngFor="let device of homeDeviceList">
+                    <nb-card accent="info">
+                        <nb-card-header>{{ device.deviceName}}</nb-card-header>
+                        <nb-card-body>
+                            A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+                            Originally, nebula was a name for any diffuse astronomical object,
+                            including galaxies beyond the Milky Way.
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+        </nb-tab>
+        <nb-tab tabTitle="三民校區後門">  
+        </nb-tab>
+        <nb-tab tabTitle="民生校區大門">
+        </nb-tab>
+    </nb-tabset>
+</div>
+<!-- <nb-card status="primary">
+    <nb-card-header style="font-size: 20px;">
+      <nb-icon icon="calendar"></nb-icon> 近七日超標次數統計
+    </nb-card-header>
+    <nb-card-body>
+      <div style="display: block;width: 100%;">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+        </canvas>
+      </div>
+    </nb-card-body>
+  </nb-card> -->

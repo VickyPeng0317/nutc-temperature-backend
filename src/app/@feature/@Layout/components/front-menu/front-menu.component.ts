@@ -14,6 +14,11 @@ export class FrontMenuComponent implements OnInit {
       link: 'home'
     },
     {
+      title: '大門設備',
+      icon: 'inbox',
+      link: '/front/home/door'
+    },
+    {
       title: '裝置管理',
       icon: 'speaker',
       link: 'device'
