@@ -1,7 +1,7 @@
 <nb-card accent="primary">
   <nb-card-header fxLayoutAlign="space-between center">
     <h4>使用者管理</h4>
-    <button (click)="openCreateUserDialog()" status="success" nbButton><nb-icon icon="plus-outline"></nb-icon>新增使用者</button>
+    <!-- <button (click)="openCreateUserDialog()" status="success" nbButton><nb-icon icon="plus-outline"></nb-icon>新增使用者</button> -->
   </nb-card-header>
 </nb-card>
 
@@ -9,11 +9,11 @@
   <nb-card-body [formGroup]="searchForm" fxLayout="row wrap" fxLayoutGap="10px">
     <div class="form-control" fxFlex="25" fxFlex.sm="100"  fxFlex.xs="100">
       <label class="label">帳號</label>
-      <input formControlName="account" type="text" nbInput fullWidth placeholder="請輸入帳號">
+      <input formControlName="userAccount" type="text" nbInput fullWidth placeholder="請輸入帳號">
     </div>
     <div class="form-control" fxFlex="25" fxFlex.sm="100"  fxFlex.xs="100">
       <label class="label">姓名</label>
-      <input formControlName="name" type="text" nbInput fullWidth placeholder="請輸入姓名">
+      <input formControlName="userName" type="text" nbInput fullWidth placeholder="請輸入姓名">
     </div>
   </nb-card-body>
 </nb-card>
@@ -43,8 +43,8 @@
             </td>
             <td fxLayoutGap="5px">
               <button status="basic" nbButton>檢視</button>
-              <button (click)="openEditUserDialog(data.account)" status="primary" nbButton>編輯</button>
-              <button (click)="deleteUser(data.id)" status="danger" nbButton>刪除</button>
+              <!-- <button (click)="openEditUserDialog(data.userAccount)" status="primary" nbButton>編輯</button>
+              <button (click)="deleteUser(data.userAccount)" status="danger" nbButton>刪除</button> -->
             </td>
           </tr>
         </tbody>

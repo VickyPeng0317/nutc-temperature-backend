@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DeviceService } from '@core/services/device.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DeviceService, IDeviceInfo } from '@core/services/device.service';
 import { ModifyDeviceDialogComponent } from '@feature/device/dialogs/modify-device-dialog/modify-device-dialog.component';
 import { NbDialogService } from '@nebular/theme';
 
@@ -11,7 +12,7 @@ import { NbDialogService } from '@nebular/theme';
 export class DeviceManagePageComponent implements OnInit {
   columnList = [
     {
-      key: 'name',
+      key: 'deviceName',
       name: '名稱'
     },
     {
@@ -31,7 +32,11 @@ export class DeviceManagePageComponent implements OnInit {
       name: '辨識方式'
     }
   ];
-  deviceList = [];
+  deviceList: IDeviceInfo[] = [];
+  searchForm = new FormGroup({
+    deviceName: new FormControl(),
+    place: new FormControl(),
+  });
   constructor(
     private dialogService: NbDialogService,
     private deviceService: DeviceService
@@ -42,8 +47,9 @@ export class DeviceManagePageComponent implements OnInit {
   }
 
   getDeviceList() {
-    this.deviceService.getDeviceList().subscribe(res =>{
-      this.deviceList = res;
+    const params = this.searchForm.getRawValue();
+    this.deviceService.getDeviceList(params).subscribe(res =>{
+      this.deviceList = res.data;
     });
   }
 
@@ -56,9 +62,9 @@ export class DeviceManagePageComponent implements OnInit {
     });
   }
 
-  openEditDialog(deviceCode: string) {
+  openEditDialog(deviceId: number) {
     const dialogData = {
-      context: { deviceCode }
+      context: { deviceId }
     };
     this.dialogService.open(ModifyDeviceDialogComponent, dialogData).onClose.subscribe(res => {
       if (!res) {
@@ -70,8 +76,7 @@ export class DeviceManagePageComponent implements OnInit {
 
   createDevice(params) {
     this.deviceService.createDevice(params).subscribe(res => {
-      const isSuccess = !res.msg;
-      if (!isSuccess) {
+      if (!res.isSuccess) {
         return alert('新增失敗');
       }
       alert('新增成功');
@@ -81,8 +86,7 @@ export class DeviceManagePageComponent implements OnInit {
 
   editDevice(params) {
     this.deviceService.editDevice(params).subscribe(res => {
-      const isSuccess = !res.msg;
-      if (!isSuccess) {
+      if (!res.isSuccess) {
         return alert('編輯失敗');
       }
       alert('編輯成功');
@@ -90,15 +94,13 @@ export class DeviceManagePageComponent implements OnInit {
     });
   }
 
-  deleteDevice(id: number) {
+  deleteDevice(deviceId: number) {
     const isDelete = confirm('是否要刪除此設備 ?');
     if (!isDelete) {
       return;
     }
-    // this.deviceList = this.deviceList.filter(x => x.id !== id);
-    this.deviceService.deleteDevice(id.toString()).subscribe(res => {
-      const isSuccess = !res.msg;
-      if (!isSuccess) {
+    this.deviceService.deleteDevice({ deviceId }).subscribe(res => {
+      if (!res.isSuccess) {
         return alert('刪除失敗');
       }
       alert('刪除成功');

@@ -1,8 +1,6 @@
+import { HttpClient } from '@angular/common/http';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
-import * as moment from 'moment';
-import { MqttService } from 'ngx-mqtt';
-import * as mqttt from "mqtt";
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
@@ -11,22 +9,9 @@ import * as mqttt from "mqtt";
 export class HomeComponent implements OnInit {
 
   constructor(
+    private http: HttpClient
   ) {
-    const connectString = 'ws://163.17.136.70:1884';
-
-    var client = mqttt.connect(connectString, {clientId: 'angular'});
-
-    client.on('connect', function () {
-      console.log(123)
-      client.publish('test/andy', 'andy_test/tmp_t')
-      client.subscribe('andy_test/tmp_t');
-    })
-
-    client.on('message', function (topic, message) {
-      // message is Buffer
-      console.log(message.toString())
-      // client.end()
-    })
+    this.http.post('https://dsl2501_70.nutc.edu.tw:5053/NutcTempApi/user/info', { userAccout: '1410532017'}).subscribe(res => console.log(res));
   }
 
   ngOnInit(): void {

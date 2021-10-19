@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { RecordService } from '@core/services/record.service';
 
 @Component({
@@ -26,6 +27,12 @@ export class RecordManagePageComponent implements OnInit {
     }
   ];
   recordList = [];
+  searchForm = new FormGroup({
+    userName: new FormControl(),
+    searchName: new FormControl(),
+    type: new FormControl(),
+    dateRange: new FormControl(),
+  });
   constructor(
     private recordService: RecordService
   ) { }
@@ -35,8 +42,9 @@ export class RecordManagePageComponent implements OnInit {
   }
 
   getRecordList() {
-    this.recordService.getRecordList().subscribe(res => {
-      this.recordList = res;
+    const params = this.searchForm.getRawValue();
+    this.recordService.getRecordList(params).subscribe(res => {
+      this.recordList = res.data;
     });
   }
 

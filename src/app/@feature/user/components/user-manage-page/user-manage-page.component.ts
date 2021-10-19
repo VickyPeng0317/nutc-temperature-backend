@@ -1,5 +1,5 @@
 import { ModifyUserDialogComponent } from './../../dialogs/modify-user-dialog/modify-user-dialog.component';
-import { UserService, ICreateUserReq, IEditUserReq } from './../../../../@core/services/user.service';
+import { UserService } from './../../../../@core/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IUserListItem } from '@core/services/user.service';
@@ -14,25 +14,29 @@ import { debounceTime } from 'rxjs/operators';
 export class UserManagePageComponent implements OnInit {
   columnList = [
     {
-      key: 'name',
+      key: 'userName',
       name: '姓名'
     },
     {
-      key: 'account',
+      key: 'userAccount',
       name: '帳號'
     },
     {
-      key: 'department',
-      name: '科系'
+      key: 'collegeName',
+      name: '院別'
     },
     {
-      key: 'email',
-      name: '信箱'
-    }
+      key: 'departmentName',
+      name: '部門/科系'
+    },
+    {
+      key: 'departmentSubName',
+      name: '職稱/班級'
+    },
   ];
   searchForm = new FormGroup({
-    account: new FormControl(''),
-    name: new FormControl(''),
+    userAccount: new FormControl(''),
+    userName: new FormControl(''),
   });
   userList: IUserListItem[] = [];
 
@@ -56,65 +60,7 @@ export class UserManagePageComponent implements OnInit {
     this.userList = [];
     const params = this.searchForm.getRawValue();
     this.userService.getUserList(params).subscribe(res => {
-      this.userList = res;
-    });
-  }
-
-  openCreateUserDialog() {
-    this.dialogService.open(ModifyUserDialogComponent).onClose.subscribe(res => {
-      if (!res) {
-        return;
-      }
-      this.createUser(res);
-    });
-  }
-
-  openEditUserDialog(account: string) {
-    const dialogData = {
-      context: { account }
-    };
-    this.dialogService.open(ModifyUserDialogComponent, dialogData).onClose.subscribe(res => {
-      if (!res) {
-        return;
-      }
-      this.editUser(res);
-    });
-  }
-
-  createUser(params: ICreateUserReq) {
-    this.userService.createUser(params).subscribe(res => {
-      const isSuccess = !res.msg;
-      if (!isSuccess) {
-        return alert('新增失敗');
-      }
-      alert('新增成功');
-      this.getUserList();
-    });
-  }
-
-  editUser(params: IEditUserReq) {
-    this.userService.editUser(params).subscribe(res => {
-      const isSuccess = !res.msg;
-      if (!isSuccess) {
-        return alert('編輯失敗');
-      }
-      alert('編輯成功');
-      this.getUserList();
-    });
-  }
-
-  deleteUser(id: number) {
-    const isDelete = confirm('是刪除此使用者');
-    if (!isDelete) {
-      return;
-    }
-    this.userService.deleteUser({ id: id.toString() }).subscribe(res => {
-      const isSuccess = !res.msg;
-      if (!isSuccess) {
-        return alert('刪除失敗');
-      }
-      alert('刪除成功');
-      this.getUserList();
+      this.userList = res.data;
     });
   }
 }

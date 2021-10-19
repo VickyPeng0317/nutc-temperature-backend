@@ -13,8 +13,8 @@ export class HomeUserListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.recordService.getRecordList().subscribe(res => {
-      this.recordList = res.concat(res);
+    this.recordService.getRecordList({perPage:1, currentPage:1}).subscribe(res => {
+      this.recordList = res.data;
     });
   }
 

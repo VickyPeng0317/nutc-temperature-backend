@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { environment } from '@environments/environment';
+import { ApiAction, Post } from '@core/decorators/api-decorator';
+import { GetHomeDeviceRecordMock, GetRecordListMock } from '@core/mocks/record-mock';
+import { IPageReq, IPageRes } from '@core/models/api-response';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,37 +14,32 @@ export class RecordService {
     private http: HttpClient
   ) { }
 
-  getRecordList() {
-    const url = environment.apiUrl + '/record/list';
-    return this.http.get<IRecordInfo[]>(url);
-    // const recordInfo: IRecordInfo = {
-    //   id:1,
-    //   userId: 1,
-    //   userName: '王大明',
-    //   userAccount: '1710932013',
-    //   deviceId: 1,
-    //   deviceName: '體溫裝置01',
-    //   temperature: '36.5',
-    //   createdTime: '2021-10-01 08:00:00',
-    // };
-    // const res = [1,1,1,1,1,1].map(() => recordInfo);
-    // return of(res);
-  }
+  /** 取得辨識紀錄清單 */
+  @Post({
+    path: '/record/list',
+    mockData: GetRecordListMock
+  })
+  getRecordList: ApiAction<IGetRecordListReq, IPageRes<IRecordInfo[]>>;
 
-  getRecordInfo(id: number) {
-    const recordInfo: IRecordInfo = {
-      id:1,
-      userId: 1,
-      userName: '王大明',
-      userAccount: '1710932013',
-      deviceId: 1,
-      deviceName: '體溫裝置01',
-      temperature: '36.5',
-      createdTime: '2021-10-01 08:00:00',
-    };
-    return of(recordInfo);
-  }
-  
+  /** 取得今日大門設備之辨識異常清單(警衛用) */
+  @Post({
+    path: '/record/homeDevice',
+    mockData: GetHomeDeviceRecordMock
+  })
+  getHomeDeviceRecordList: ApiAction<IGetHomeDeviceRecordListRes, IRecordInfo[]>;
+}
+
+export interface IGetHomeDeviceRecordListRes {
+  data: IRecordInfo[];
+}
+
+export interface IGetRecordListReq extends IPageReq {
+  userName?: string;
+  userAccount?: string;
+  searchName?: string;
+  type?: string;
+  dateStart?: string;
+  dateEnd?: string;
 }
 
 export interface IRecordInfo {

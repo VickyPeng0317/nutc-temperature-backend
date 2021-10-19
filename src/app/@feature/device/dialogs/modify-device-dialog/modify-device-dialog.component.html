@@ -1,7 +1,7 @@
-<nb-card style="width: 400px" [status]="!!deviceCode ? 'primary' : 'success'">
+<nb-card style="width: 400px" [status]="!!deviceId ? 'primary' : 'success'">
     <nb-card-header>
         <h5>
-            {{ !!deviceCode ? '編輯裝置' : '新增裝置' }}
+            {{ !!deviceId ? '編輯裝置' : '新增裝置' }}
         </h5>
     </nb-card-header>
     <nb-card-body>
@@ -9,7 +9,7 @@
             <div class="form-control">
                 <label class="lable">名稱</label>
                 <form-required></form-required>
-                <input formControlName="name" fullWidth nbInput placeholder="請輸入名稱">
+                <input formControlName="deviceName" fullWidth nbInput placeholder="請輸入名稱">
             </div>
             <div class="form-control">
                 <label class="lable">機型</label>

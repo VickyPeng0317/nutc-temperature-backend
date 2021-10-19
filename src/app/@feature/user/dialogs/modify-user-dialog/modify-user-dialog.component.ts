@@ -33,9 +33,9 @@ export class ModifyUserDialogComponent implements OnInit {
     this.setEditForm(this.account);
   }
 
-  setEditForm(account: string) {
-    this.userService.getUserInfo({ account }).subscribe(res => {
-      const isSuccess = !res.msg;
+  setEditForm(userAccount: string) {
+    this.userService.getUserInfo({ userAccount }).subscribe(res => {
+      const isSuccess = !!res;
       if (!isSuccess) {
         return;
       }
