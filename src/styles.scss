@@ -36,3 +36,52 @@
   }
 
 }
+
+@mixin color-label($color) {
+  display: inline-block;
+  font-weight: 400;
+  color: #fff;
+  background-color: $color;
+  border-color: $color;
+  padding: 4px 6px;
+  border-radius: 0.2rem;
+  font-size: 14px;
+}
+
+.dark-label {
+  @include color-label(#474747);
+}
+.success-label {
+  @include color-label(#2ce69b);
+}
+.danger-label {
+  @include color-label(#ff3d71);
+}
+.primary-label {
+  @include color-label(#3366ff);
+}
+.info-label {
+  @include color-label(#0095ff);
+}
+.warning-label {
+  @include color-label(#ffaa00);
+}
+
+.text-success {
+  color: #2ce69b;
+}
+.text-danger {
+  color:#ff3d71;
+}
+.text-primary {
+  color:#3366ff;
+}
+.text-info {
+  color:#0095ff;
+}
+.text-warning {
+  color:#ffaa00;
+}
+.text-dark {
+  color: #474747;
+}

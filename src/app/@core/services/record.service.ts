@@ -26,7 +26,7 @@ export class RecordService {
     path: '/record/homeDevice',
     mockData: GetHomeDeviceRecordMock
   })
-  getHomeDeviceRecordList: ApiAction<IGetHomeDeviceRecordListRes, IRecordInfo[]>;
+  getHomeDeviceRecordList: ApiAction<void, IGetHomeDeviceRecordListRes>;
 }
 
 export interface IGetHomeDeviceRecordListRes {

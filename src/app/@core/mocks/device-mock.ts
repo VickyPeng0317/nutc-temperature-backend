@@ -43,7 +43,7 @@ export const GetHomeDeviceListMock = {
     data: [
         {
             deviceId: 1,
-            deviceName: '體溫感測器',
+            deviceName: '體溫感測器01',
             deviceCode: 'x06812-73',
             place: '資訊大樓2501',
             maintainOrganization: '資工系',
@@ -51,8 +51,8 @@ export const GetHomeDeviceListMock = {
             status: '啟用',
             type: '影像辨識',
         },{
-            deviceId: 1,
-            deviceName: '體溫感測器',
+            deviceId: 2,
+            deviceName: '體溫感測器02',
             deviceCode: 'x06812-73',
             place: '資訊大樓2501',
             maintainOrganization: '資工系',
@@ -60,8 +60,8 @@ export const GetHomeDeviceListMock = {
             status: '啟用',
             type: '影像辨識',
         },{
-            deviceId: 1,
-            deviceName: '體溫感測器',
+            deviceId: 3,
+            deviceName: '體溫感測器03',
             deviceCode: 'x06812-73',
             place: '資訊大樓2501',
             maintainOrganization: '資工系',
@@ -69,8 +69,8 @@ export const GetHomeDeviceListMock = {
             status: '啟用',
             type: '影像辨識',
         },{
-            deviceId: 1,
-            deviceName: '體溫感測器',
+            deviceId: 4,
+            deviceName: '體溫感測器04',
             deviceCode: 'x06812-73',
             place: '資訊大樓2501',
             maintainOrganization: '資工系',

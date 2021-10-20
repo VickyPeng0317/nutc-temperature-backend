@@ -1,3 +1,17 @@
 .device-card {
     padding-right: 20px;
+    .card-header {
+        font-size: 22px; 
+        font-weight: bold;
+    }
+    .count-title {
+        font-size: 18px; 
+        font-weight: bold;
+    }
+    .waring-list-title {
+        font-size: 18px;
+        font-weight: bold;
+        display: block;
+        padding-bottom: 10px;
+    }
 }
