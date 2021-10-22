@@ -14,8 +14,12 @@ export class HomeDoorPageComponent implements OnInit, OnDestroy {
   allDoorName = ['三民校區大門', '三民校區後門', '民生校區大門'];
   obsList = (new Observable()).pipe(map(_ => []));
   searchForm = new FormGroup({
-    dateStart: new FormControl(),
-    dateEnd: new FormControl()
+    dateStart: new FormControl(
+      moment().format('YYYY/MM/DD 00:00:00')
+    ),
+    dateEnd: new FormControl(
+      moment().format('YYYY/MM/DD 23:59:59')
+    )
   });
   HOT_NUM = 37.3;
   COOL_NUM = 35.5;
