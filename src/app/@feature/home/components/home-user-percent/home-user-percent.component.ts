@@ -10,6 +10,9 @@ export class HomeUserPercentComponent implements OnInit, OnChanges {
   @Input()
   recordList: IRecordInfo[] = [];
   hotCount = 0;
+  get percent () {
+    return (this.hotCount/this.recordList.length)*100;
+  }
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.recordList.currentValue.length === 0) {
