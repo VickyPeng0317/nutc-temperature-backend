@@ -35,11 +35,20 @@ export const GetHomeDeviceRecordMock = (() => {
         temperature: "36.8",
         createdTime: "2021-10-18 08:56:43"
     };
-    const recordList = [1,2,3,4].map(x => {
-        const deviceId = x;
-        return { ...record, deviceId }
-    });
-    return {
-        data: [...recordList, ...recordList, ...recordList, ...recordList, ...recordList]
+    const list = [];
+    for(let i = 1; i <= 70; i++) {
+        const deviceId = (i % 4) + 1;
+        const temperatureArr = [35.2,36.4,36.2,37.1,36.8,38.2,37.8,37.5,36.3];
+        const temperature = temperatureArr[Math.floor(Math.random()*(9))];
+        const data = { ...record, deviceId, temperature};
+        list.push(data);
     };
+    return { data: list };
+    // const recordList = [1,2,3,4].map(x => {
+    //     const deviceId = x;
+    //     return { ...record, deviceId }
+    // });
+    // return {
+    //     data: [...recordList, ...recordList, ...recordList, ...recordList, ...recordList]
+    // };
 })();
