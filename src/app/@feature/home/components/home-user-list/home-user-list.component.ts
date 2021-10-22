@@ -1,22 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IRecordInfo, RecordService } from '@core/services/record.service';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { IRecordInfo } from '@core/services/record.service';
 
 @Component({
   selector: 'home-user-list',
   templateUrl: './home-user-list.component.html',
   styleUrls: ['./home-user-list.component.scss']
 })
-export class HomeUserListComponent implements OnInit {
+export class HomeUserListComponent implements OnChanges {
   @Input()
   recordList: IRecordInfo[] = [];
-  constructor(
-    private recordService: RecordService
-  ) { }
-
-  ngOnInit(): void {
-    this.recordService.getRecordList({perPage:1, currentPage:1}).subscribe(res => {
-      this.recordList = res.data;
-    });
+  showList: IRecordInfo[] = [];
+  constructor() { }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.recordList.currentValue.length === 0) {
+      return;
+    }
+    this.showList = this.recordList.filter(x => +x.temperature > 37.3);
   }
-
 }

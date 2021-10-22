@@ -73,7 +73,7 @@ export const GetRecordListForStaffMock = (() => {
     for(let i = 1; i <= 600; i++) {
         const deviceId = (i % 4) + 1;
         const index = Math.floor(Math.random()*(3));
-        const createdTime = moment().format(`YYYY/MM/DD ${i%7 + 9}:00:00`);
+        const createdTime = moment().format(`YYYY/MM/DD ${i%7 + 9}:mm:ss`);
         const temperatureArr = [36.5, 36.4, 38.2];
         const temperature = temperatureArr[index];
         const data = { ...record, deviceId, temperature, createdTime};
