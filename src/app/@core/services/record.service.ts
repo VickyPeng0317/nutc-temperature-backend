@@ -14,19 +14,42 @@ export class RecordService {
     private http: HttpClient
   ) { }
 
-  /** 取得辨識紀錄清單 */
+  /** 取得辨識紀錄清單 (分頁) */
+  @Post({
+    path: '/record/listPage',
+    mockData: GetRecordListMock
+  })
+  getRecordList: ApiAction<IGetRecordListReq, IPageRes<IRecordInfo[]>>;
+
+  /** 取得辨識紀錄清單 (不分) */
   @Post({
     path: '/record/list',
     mockData: GetRecordListMock
   })
-  getRecordList: ApiAction<IGetRecordListReq, IPageRes<IRecordInfo[]>>;
+  getRecordListForStaff: ApiAction<IGetRecordListForStaffReq, IGetRecordListForStaffRes>;
 
   /** 取得今日大門設備之辨識異常清單(警衛用) */
   @Post({
     path: '/record/homeDevice',
     mockData: GetHomeDeviceRecordMock
   })
-  getHomeDeviceRecordList: ApiAction<void, IGetHomeDeviceRecordListRes>;
+  getHomeDeviceRecordList: ApiAction<IGetHomeDeviceRecordListReq, IGetHomeDeviceRecordListRes>;
+}
+
+export interface IGetRecordListForStaffReq {
+  searchName: string;
+  dateStart: string;
+  dateEnd: string;
+}
+
+export interface IGetRecordListForStaffRes {
+  data: IRecordInfo[];
+}
+
+export interface IGetHomeDeviceRecordListReq {
+  doorName: string;
+  dateStart: string;
+  dateEnd: string;
 }
 
 export interface IGetHomeDeviceRecordListRes {
@@ -35,7 +58,7 @@ export interface IGetHomeDeviceRecordListRes {
 
 export interface IGetRecordListReq extends IPageReq {
   userName?: string;
-  userAccount?: string;
+  userId?: number;
   searchName?: string;
   type?: string;
   dateStart?: string;
@@ -47,8 +70,13 @@ export interface IRecordInfo {
   userId: number;
   userName: string;
   userAccount: string;
+  collegeName: string;
+  departmentName: string;
+  departmentSubName: string;
+  identity: string;
   deviceId: number;
   deviceName: string;
+  place: string;
   temperature: string;
   createdTime: string;
 }

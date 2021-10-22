@@ -45,7 +45,7 @@ interface ILoginRes {
 }
 
 interface IGetUserInfoReq {
-  userAccount: string;
+  userId: number;
 }
 
 interface IGetUserListReq extends IPageReq{
@@ -54,6 +54,7 @@ interface IGetUserListReq extends IPageReq{
 }
 
 export interface IUserListItem {
+  userId: number;
   userAccount: string;
   userName: string;
   collegeName: number;

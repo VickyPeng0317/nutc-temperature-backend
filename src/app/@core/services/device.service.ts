@@ -54,7 +54,11 @@ export class DeviceService {
     path: '/device/homeUse',
     mockData: GetHomeDeviceListMock
   })
-  getHomeDeviceList: ApiAction<void,  IGetHomeDeviceList>;
+  getHomeDeviceList: ApiAction<IGetHomeDeviceListReq,  IGetHomeDeviceList>;
+}
+
+interface IGetHomeDeviceListReq {
+  doorName: string;
 }
 
 interface IGetHomeDeviceList {

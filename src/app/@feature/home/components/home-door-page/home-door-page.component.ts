@@ -16,10 +16,15 @@ export class HomeDoorPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.deviceService.getHomeDeviceList().subscribe(res => {
+    this.deviceService.getHomeDeviceList({ doorName: '123'}).subscribe(res => {
       this.homeDeviceList = res.data;
     });
-    this.recordService.getHomeDeviceRecordList().subscribe(res => {
+    const params = {
+      doorName: '',
+      dateStart: '',
+      dateEnd: ''
+    };
+    this.recordService.getHomeDeviceRecordList(params).subscribe(res => {
       this.recordList = res.data;
     });
   }
