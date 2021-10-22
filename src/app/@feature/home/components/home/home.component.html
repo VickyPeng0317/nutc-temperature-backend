@@ -4,7 +4,7 @@
     <home-chart-hours [recordList]="recordList"></home-chart-hours>
   </div>
   <div class="chart-card" fxFlex="50" fxFlex.sm="100"  fxFlex.xs="100">
-    <home-chart-days></home-chart-days>
+    <home-chart-days [searchName]="searchForm.value.searchName"></home-chart-days>
   </div>
   <div class="chart-card" fxFlex="50" fxFlex.sm="100" fxFlex.xs="100">
     <home-user-percent [recordList]="recordList"></home-user-percent>

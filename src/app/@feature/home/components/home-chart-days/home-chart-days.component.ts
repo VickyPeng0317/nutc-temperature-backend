@@ -1,15 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IRecordInfo } from '@core/services/record.service';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { IRecordInfo, RecordService } from '@core/services/record.service';
 import { ChartType } from 'chart.js';
+import * as moment from 'moment';
 
 @Component({
   selector: 'home-chart-days',
   templateUrl: './home-chart-days.component.html',
   styleUrls: ['./home-chart-days.component.scss']
 })
-export class HomeChartDaysComponent implements OnInit {
+export class HomeChartDaysComponent implements OnInit, OnChanges {
   @Input()
-  recordList: IRecordInfo[] = [];
+  searchName: string = '';
   
   barChartType: ChartType = 'line';
 
@@ -30,9 +31,34 @@ export class HomeChartDaysComponent implements OnInit {
       pointBorderColor: '#36A2EB'
     }
   ];
-  constructor() { }
-
+  constructor(
+    private recordService: RecordService
+  ) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getRecordListForStaff();
+  }
+  getRecordListForStaff() {
+    const params = {
+      searchName: this.searchName,
+      dateStart: moment().add(-7, 'days').format('YYYY/MM/DD 00:00:00'),
+      dateEnd: moment().format('YYYY/MM/DD 23:59:59')
+    };
+    this.recordService.getRecordListForStaff(params).subscribe(res => {
+      const recordList = res.data;
+      const allDay = [... new Set(recordList.map(x => moment(x.createdTime).format('YYYY/MM/DD')))].sort();
+      this.barChartLabels = allDay.map(x => moment(x).format('MM/DD'));
+      const chartData = allDay.map(time => {
+        const count = recordList.filter(record => {
+          const recordTime = moment(record.createdTime).format('YYYY/MM/DD');
+          return recordTime === time && +record.temperature > 37.3;
+        }).length;
+        return count;
+      });
+      this.barChartData[0].data = chartData;
+    });
+  }
   ngOnInit(): void {
+    this.getRecordListForStaff();
   }
 
 }
