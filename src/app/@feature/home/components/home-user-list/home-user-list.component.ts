@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { RecordService } from '@core/services/record.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { IRecordInfo, RecordService } from '@core/services/record.service';
 
 @Component({
   selector: 'home-user-list',
@@ -7,7 +7,8 @@ import { RecordService } from '@core/services/record.service';
   styleUrls: ['./home-user-list.component.scss']
 })
 export class HomeUserListComponent implements OnInit {
-  recordList = [];
+  @Input()
+  recordList: IRecordInfo[] = [];
   constructor(
     private recordService: RecordService
   ) { }

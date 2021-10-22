@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { environment } from '@environments/environment';
 import { ApiAction, Post } from '@core/decorators/api-decorator';
-import { GetHomeDeviceRecordMock, GetRecordListMock } from '@core/mocks/record-mock';
+import { GetHomeDeviceRecordMock, GetRecordListForStaffMock, GetRecordListMock } from '@core/mocks/record-mock';
 import { IPageReq, IPageRes } from '@core/models/api-response';
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class RecordService {
   /** 取得辨識紀錄清單 (不分) */
   @Post({
     path: '/record/list',
-    mockData: GetRecordListMock
+    mockData: GetRecordListForStaffMock
   })
   getRecordListForStaff: ApiAction<IGetRecordListForStaffReq, IGetRecordListForStaffRes>;
 

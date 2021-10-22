@@ -1,3 +1,5 @@
+import * as moment from "moment";
+
 export const GetRecordListMock = {
     pageParams: {
         perPage: 6,
@@ -51,4 +53,31 @@ export const GetHomeDeviceRecordMock = (() => {
     // return {
     //     data: [...recordList, ...recordList, ...recordList, ...recordList, ...recordList]
     // };
+})();
+
+export const GetRecordListForStaffMock = (() => {
+    const record = {
+        id: 1,
+        userName: "彭浚翔",
+        userAccount: "10430004",
+        collegeName: "資訊學院",
+        departmentName: "資工系",
+        departmentSubName: "專案",
+        identity: "student",
+        deviceId: 1,
+        deviceName: "裝置名稱",
+        temperature: "36.8",
+        createdTime: "2021-10-18 08:56:43"
+    };
+    const list = [];
+    for(let i = 1; i <= 600; i++) {
+        const deviceId = (i % 4) + 1;
+        const index = Math.floor(Math.random()*(3));
+        const createdTime = moment().format(`YYYY/MM/DD ${i%7 + 9}:00:00`);
+        const temperatureArr = [36.5, 36.4, 38.2];
+        const temperature = temperatureArr[index];
+        const data = { ...record, deviceId, temperature, createdTime};
+        list.push(data);
+    };
+    return { data: list };
 })();

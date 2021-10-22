@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IRecordInfo } from '@core/services/record.service';
 import { ChartType } from 'chart.js';
 
 @Component({
@@ -7,6 +8,9 @@ import { ChartType } from 'chart.js';
   styleUrls: ['./home-chart-days.component.scss']
 })
 export class HomeChartDaysComponent implements OnInit {
+  @Input()
+  recordList: IRecordInfo[] = [];
+  
   barChartType: ChartType = 'line';
 
   barChartOptions = {

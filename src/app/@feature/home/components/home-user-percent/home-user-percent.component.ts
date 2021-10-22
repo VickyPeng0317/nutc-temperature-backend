@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IRecordInfo } from '@core/services/record.service';
 
 @Component({
   selector: 'home-user-percent',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-user-percent.component.scss']
 })
 export class HomeUserPercentComponent implements OnInit {
-
+  @Input()
+  recordList: IRecordInfo[] = [];
   constructor() { }
 
   ngOnInit(): void {

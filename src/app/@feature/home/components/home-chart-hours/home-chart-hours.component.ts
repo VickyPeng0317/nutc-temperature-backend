@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { IRecordInfo } from '@core/services/record.service';
 import { ChartType } from 'chart.js';
+import * as moment from 'moment';
 
 @Component({
   selector: 'home-chart-hours',
   templateUrl: './home-chart-hours.component.html',
   styleUrls: ['./home-chart-hours.component.scss']
 })
-export class HomeChartHoursComponent implements OnInit {
+export class HomeChartHoursComponent implements OnInit, OnChanges {
+  @Input()
+  recordList: IRecordInfo[] = [];
+  
   barChartType: ChartType = 'bar';
 
   barChartOptions = {
@@ -26,8 +31,30 @@ export class HomeChartHoursComponent implements OnInit {
     }
   ];
   constructor() { }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.recordList.currentValue.length === 0) {
+      return;
+    }
+    this.generateChart();
+  }
 
   ngOnInit(): void {
+    
+  }
+
+  generateChart() {
+    const allTime = [... new Set(
+      this.recordList.map(x => moment(x.createdTime).format('HH:00'))
+    )].sort();
+    const chartData = allTime.map(time => {
+      const count = this.recordList.filter(record => {
+        const recordTime = moment(record.createdTime).format('HH:00');
+        return recordTime === time && +record.temperature > 37.3;
+      }).length;
+      return count;
+    });
+    this.barChartLabels = allTime;
+    this.barChartData[0].data = chartData;
   }
 
 }

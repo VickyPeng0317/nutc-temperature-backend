@@ -1,15 +1,15 @@
 
 <div fxLayout="row wrap">
   <div class="chart-card" fxFlex="50" fxFlex.sm="100" fxFlex.xs="100">
-    <home-chart-hours></home-chart-hours>
+    <home-chart-hours [recordList]="recordList"></home-chart-hours>
   </div>
   <div class="chart-card" fxFlex="50" fxFlex.sm="100"  fxFlex.xs="100">
     <home-chart-days></home-chart-days>
   </div>
   <div class="chart-card" fxFlex="50" fxFlex.sm="100" fxFlex.xs="100">
-    <home-user-percent></home-user-percent>
+    <home-user-percent [recordList]="recordList"></home-user-percent>
   </div>
   <div class="chart-card" fxFlex="50" fxFlex.sm="100" fxFlex.xs="100">
-    <home-user-list></home-user-list>
+    <home-user-list [recordList]="recordList"></home-user-list>
   </div>
 </div>
