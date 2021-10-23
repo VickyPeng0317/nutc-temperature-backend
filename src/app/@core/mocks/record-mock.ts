@@ -9,6 +9,7 @@ export const GetRecordListMock = {
     data: [
         {
             id: 1,
+            userId: 1,
             userName: "彭浚翔",
             userAccount: "10430004",
             collegeName: "資訊學院",
@@ -26,6 +27,7 @@ export const GetRecordListMock = {
 export const GetHomeDeviceRecordMock = (() => {
     const record = {
         id: 1,
+        userId: 1,
         userName: "彭浚翔",
         userAccount: "10430004",
         collegeName: "資訊學院",
@@ -58,6 +60,7 @@ export const GetHomeDeviceRecordMock = (() => {
 export const GetRecordListForStaffMock = (() => {
     const record = {
         id: 1,
+        userId: 1,
         userName: "彭浚翔",
         userAccount: "10430004",
         collegeName: "資訊學院",
