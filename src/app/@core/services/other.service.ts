@@ -12,7 +12,9 @@ export class OtherService {
   /** 取得所有"院/部門/職稱/科系/班級"清單 */
   @Post({
     path: '/other/allClgeAndDep',
-    mockData: ['資訊學院', '資工系', '教務處']
+    mockData: {
+      Class: ['資訊學院', '資工系', '教務處']
+    }
   })
   getAllClgeAndDep: ApiAction<void, IAllClegAndDep>;
 }
