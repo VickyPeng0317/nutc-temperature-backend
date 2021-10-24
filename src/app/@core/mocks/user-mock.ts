@@ -6,6 +6,7 @@ export const GetUserListMock = {
     },
     data: [
         {
+            userId: 1,
             userAccount: "10430004",
             userName: "彭浚翔",
             collegeName: "資訊學院",
@@ -14,6 +15,7 @@ export const GetUserListMock = {
             identity: "student"
         },
         {
+            userId: 1,
             userAccount: "tctctceteacher",
             userName: "彭翔浚",
             collegeName: "資訊學院",
@@ -37,6 +39,7 @@ export const GetUserInfoMock = {
 export const LoginMock = {
     isSuccess: true,
     data: {
+        userId: 1,
         userAccount: "10430004",
         userName: "彭浚翔",
         collegeName: "資訊學院",
