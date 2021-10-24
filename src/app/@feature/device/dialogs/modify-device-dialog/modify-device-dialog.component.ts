@@ -19,7 +19,7 @@ export class ModifyDeviceDialogComponent implements OnInit {
     maintainOrganization: new FormControl('', Validators.required),
     maintainCall: new FormControl(''),
     status: new FormControl('啟用', Validators.required),
-    type: new FormControl('影像辨識', Validators.required),
+    type: new FormControl('體溫計', Validators.required),
   });
   constructor(
     protected dialogRef: NbDialogRef<ModifyDeviceDialogComponent>,

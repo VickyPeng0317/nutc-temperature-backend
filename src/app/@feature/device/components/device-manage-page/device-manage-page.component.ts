@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DeviceService, IDeviceInfo } from '@core/services/device.service';
 import { ModifyDeviceDialogComponent } from '@feature/device/dialogs/modify-device-dialog/modify-device-dialog.component';
+import { ViewDeviceInfoDialogComponent } from '@feature/device/dialogs/view-device-info-dialog/view-device-info-dialog.component';
 import { NbDialogService } from '@nebular/theme';
 
 @Component({
@@ -72,6 +73,13 @@ export class DeviceManagePageComponent implements OnInit {
       }
       this.editDevice(res);
     });
+  }
+
+  openInfoDialog(deviceId: number) {
+    const dialogData = {
+      context: { deviceId }
+    };
+    this.dialogService.open(ViewDeviceInfoDialogComponent, dialogData);
   }
 
   createDevice(params) {

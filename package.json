@@ -27,6 +27,7 @@
     "@nebular/moment": "^6.2.1",
     "@nebular/security": "^6.2.1",
     "@nebular/theme": "^6.2.1",
+    "angularx-qrcode": "^11.0.0",
     "buffer": "^6.0.3",
     "chart.js": "^2.9.4",
     "date-fns": "^2.16.1",

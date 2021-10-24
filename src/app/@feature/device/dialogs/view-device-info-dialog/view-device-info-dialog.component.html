@@ -1,0 +1,26 @@
+<nb-card style="width: 400px">
+    <nb-card-header>
+      <h5>裝置詳細</h5>
+    </nb-card-header>
+    <nb-card-body>
+      <div fxLayout="column" fxLayoutGap="10px">
+        <span>名稱: {{ deviceInfo.deviceName }} </span>
+        <span>機型: {{ deviceInfo.deviceCode }} </span>
+        <span>位置: {{ deviceInfo.place }} </span>
+        <span>維修單位: {{ deviceInfo.maintainOrganization }} </span>
+        <span>維修專線: {{ deviceInfo.maintainCall }} </span>
+        <span>狀態: {{ deviceInfo.status }} </span>
+        <span>辨識方式: {{ deviceInfo.type }} </span>
+        <span>QRCode</span>
+        <div fxLayout="column" fxLayoutAlign="center center">
+            <qrcode [qrdata]="qrCodeData" [width]="250" [errorCorrectionLevel]="'M'"></qrcode>
+            <span>{{ deviceInfo.place }}</span>
+        </div>
+        
+      </div>
+    </nb-card-body>
+    <nb-card-footer fxLayoutAlign="end center" fxLayoutGap="5px">
+      <button (click)="close()" status="basic" nbButton>關閉</button>
+    </nb-card-footer>
+  </nb-card>
+  
