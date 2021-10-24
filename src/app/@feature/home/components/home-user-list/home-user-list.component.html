@@ -18,6 +18,9 @@
                 <div fxFlex="30%">{{ record.deviceName }}</div>
                 <div fxFlex="30%">{{ record.createdTime | date:'HH:mm:ss' }}</div>
             </nb-list-item>
+            <nb-list-item *ngIf="showList.length === 0" fxLayoutAlign="center">
+                <span>無</span>
+            </nb-list-item>
           </nb-list>
     </nb-card-body>
 </nb-card>

@@ -37,6 +37,9 @@
                                             <div fxFlex="25%">{{ record.temperature }}</div>
                                             <div fxFlex="30%">{{ record.createdTime | date:'HH:mm:ss' }}</div>
                                         </nb-list-item>
+                                        <nb-list-item *ngIf="device.waringinRecordList.length === 0" fxLayoutAlign="center">
+                                            <span>無</span>
+                                        </nb-list-item>
                                     </nb-list>
                                 </div>
                             </div>
