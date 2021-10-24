@@ -11,8 +11,16 @@ export class OtherService {
 
   /** 取得所有"院/部門/職稱/科系/班級"清單 */
   @Post({
-    path: '/device/list',
+    path: '/other/allClgeAndDep',
     mockData: ['資訊學院', '資工系', '教務處']
   })
-  getAllClgeAndDep: ApiAction<void, { data: string[] }>;
+  getAllClgeAndDep: ApiAction<void, IAllClegAndDep>;
+}
+
+export interface IAllClegAndDep {
+  Class: string[]
+  College: string[]
+  Department: string[]
+  DepartmentName: string[]
+  Staff: string[]
 }
