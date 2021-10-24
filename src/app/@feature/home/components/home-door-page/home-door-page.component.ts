@@ -44,7 +44,10 @@ export class HomeDoorPageComponent implements OnInit, OnDestroy {
   initData() {
     this.obsList = from(this.allDoorName).pipe(
       mergeMap(doorName => this.getDoorDeviceAndRecord(doorName)),
-      toArray()
+      toArray(),
+      map(list => this.allDoorName.map(name => 
+        list.find(x => x.doorName === name)
+      ))
     );
   }
 
