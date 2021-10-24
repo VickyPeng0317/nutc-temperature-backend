@@ -5,8 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbMomentDateModule } from '@nebular/moment';
 import { NbSecurityModule } from '@nebular/security';
-import { NbCardModule, NbButtonModule, NbInputModule, NbActionsModule, NbTooltipModule, NbIconModule, NbListModule, NbUserModule, NbAccordionModule, NbSelectModule, NbCheckboxModule, NbCalendarModule, NbDatepickerModule, NbMenuModule, NbTabsetModule, NbAlertModule, NbPopoverModule, NbFormFieldModule, NbRadioModule, NbToggleModule, NbAutocompleteModule, NbLayoutModule, NbSearchModule, NbSidebarModule, NbContextMenuModule } from '@nebular/theme';
-import { zhTW } from 'date-fns/locale';
+import { NbCardModule, NbButtonModule, NbInputModule, NbActionsModule, NbTooltipModule, NbIconModule, NbListModule, NbUserModule, NbAccordionModule, NbSelectModule, NbCheckboxModule, NbCalendarModule, NbDatepickerModule, NbMenuModule, NbTabsetModule, NbAlertModule, NbPopoverModule, NbFormFieldModule, NbRadioModule, NbToggleModule, NbAutocompleteModule, NbLayoutModule, NbSearchModule, NbSidebarModule, NbContextMenuModule, NbTimepickerModule } from '@nebular/theme';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
 import { RequiredFormDirective } from './directives/required-form.directive';
 import { ChartsModule } from 'ng2-charts';
@@ -41,7 +40,8 @@ const NB_MODEL = [
   NbSidebarModule,
   NbContextMenuModule,
   NbSecurityModule,
-  NbEvaIconsModule
+  NbEvaIconsModule,
+  NbTimepickerModule
 ];
 
 const DIRECTIVES = [
@@ -58,6 +58,7 @@ const COMPONENTS = [
     ...COMPONENTS
   ],
   imports: [
+    NbDateFnsDateModule.forChild({}),
     CommonModule,
     NebularModule,
     FlexLayoutModule,
@@ -72,7 +73,7 @@ const COMPONENTS = [
     QRCodeModule,
     ...NB_MODEL,
     ...DIRECTIVES,
-    ...COMPONENTS
+    ...COMPONENTS,
   ]
 })
 export class SharedModule { }
