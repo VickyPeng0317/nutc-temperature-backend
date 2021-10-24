@@ -2,7 +2,7 @@
   <div class="form-control" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
     <label class="label">院/部門/職稱/科系/班級</label>
     <input formControlName="searchName" [nbAutocomplete]="auto" type="text" nbInput fullWidth placeholder="請輸入名稱">
-    <nb-autocomplete #auto (selectedChange)="onSelectionChange($event)">
+    <nb-autocomplete #auto>
       <nb-option *ngFor="let option of filteredOptions$ | async" [value]="option">
         {{ option }}
       </nb-option>
@@ -10,12 +10,12 @@
   </div>
   <div class="form-control" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
     <label class="label">查詢時間起</label>
-    <input formControlName="dateStart" nbInput placeholder="請選擇查詢時間起" [nbDatepicker]="dateTimePickerStart">
+    <input formControlName="dateStart" nbInput fullWidth placeholder="請選擇查詢時間起" [nbDatepicker]="dateTimePickerStart">
     <nb-date-timepicker withSeconds #dateTimePickerStart></nb-date-timepicker>
   </div>
   <div class="form-control" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
     <label class="label">查詢時間訖</label>
-    <input formControlName="dateEnd" nbInput placeholder="請選擇查詢時間訖" [nbDatepicker]="dateTimePickerEnd">
+    <input formControlName="dateEnd" nbInput fullWidth placeholder="請選擇查詢時間訖" [nbDatepicker]="dateTimePickerEnd">
     <nb-date-timepicker withSeconds #dateTimePickerEnd></nb-date-timepicker>
   </div>
 </nb-card-body>

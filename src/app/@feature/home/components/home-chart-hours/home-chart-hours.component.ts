@@ -32,7 +32,7 @@ export class HomeChartHoursComponent implements OnInit, OnChanges {
   ];
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.recordList.currentValue.length === 0) {
+    if (!changes.recordList.currentValue) {
       return;
     }
     this.generateChart();

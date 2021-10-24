@@ -12,7 +12,7 @@ export class HomeUserListComponent implements OnChanges {
   showList: IRecordInfo[] = [];
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.recordList.currentValue.length === 0) {
+    if (!changes.recordList.currentValue) {
       return;
     }
     this.showList = this.recordList.filter(x => +x.temperature > 37.3);

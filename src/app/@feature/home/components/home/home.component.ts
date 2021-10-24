@@ -44,13 +44,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  onSelectionChange(value) {
-    const list = this.allClegAndDep.filter(x => x.includes(value));
-    this.filteredOptions$ = of(list);
-  }
-
   onFormChange() {
-    this.searchForm.valueChanges.pipe(debounceTime(500)).subscribe(() => {
+    this.searchForm.valueChanges.pipe(debounceTime(500)).subscribe((data) => {
+      const list = this.allClegAndDep.filter(x => x.includes(data.searchName));
+      this.filteredOptions$ = of(list);
       this.getRecordListForStaff();
     });
   }

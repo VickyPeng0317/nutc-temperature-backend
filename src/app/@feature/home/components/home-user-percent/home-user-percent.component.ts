@@ -15,7 +15,7 @@ export class HomeUserPercentComponent implements OnInit, OnChanges {
   }
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.recordList.currentValue.length === 0) {
+    if (!changes.recordList.currentValue) {
       return;
     }
     this.hotCount = this.recordList.filter(x => +x.temperature > 37.3).length;
