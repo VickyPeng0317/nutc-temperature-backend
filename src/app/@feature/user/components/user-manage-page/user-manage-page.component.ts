@@ -80,12 +80,13 @@ export class UserManagePageComponent implements OnInit {
     const formData = this.searchForm.getRawValue();
     const params = {
       currentPage,
-      perPage: '6',
+      perPage: 6,
       ...formData
     };
     this.userService.getUserList(params).subscribe(res => {
       this.userList = res.data;
       this.pageParams = res.pageParams;
+      console.log(res);
     });
   }
   openInfoDialog(userId: number) {

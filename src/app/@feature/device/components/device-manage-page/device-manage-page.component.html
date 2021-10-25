@@ -6,14 +6,14 @@
   </nb-card>
   
   <nb-card accent="info">
-    <nb-card-body fxLayout="row wrap" fxLayoutGap="10px">
+    <nb-card-body [formGroup]="searchForm" fxLayout="row wrap" fxLayoutGap="10px">
       <div class="form-control" fxFlex="25" fxFlex.sm="100"  fxFlex.xs="100">
-        <label class="label">名稱</label>
-        <input type="text" nbInput fullWidth placeholder="請輸入名稱">
+        <label class="label">裝置名稱</label>
+        <input formControlName="deviceName" type="text" nbInput fullWidth placeholder="請輸入名稱">
       </div>
       <div class="form-control" fxFlex="25" fxFlex.sm="100"  fxFlex.xs="100">
-        <label class="label">型號</label>
-        <input type="text" nbInput fullWidth placeholder="請輸入型號">
+        <label class="label">位置</label>
+        <input formControlName="place" type="text" nbInput fullWidth placeholder="請輸入型號">
       </div>
     </nb-card-body>
   </nb-card>
@@ -32,7 +32,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of deviceList; index as i">
+            <tr *ngFor="let data of deviceList | paginate: (pageParams | paginationFormat);index as i">
               <td>{{ i + 1 }}</td>
               <td *ngFor="let col of columnList">
                 <ng-container [ngSwitch]="col.key">
@@ -50,6 +50,9 @@
             </tr>
           </tbody>
         </table>
+        <div fxLayoutAlign="center">
+          <pagination-controls  previousLabel="上一頁" nextLabel="下一頁" (pageChange)="pageChange($event)"></pagination-controls>
+        </div>
       </div>
     </nb-card-body>
   </nb-card>

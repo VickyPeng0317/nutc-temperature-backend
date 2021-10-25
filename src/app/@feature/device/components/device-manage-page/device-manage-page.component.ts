@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { IPageParams } from '@core/models/page-params';
 import { DeviceService, IDeviceInfo } from '@core/services/device.service';
 import { ModifyDeviceDialogComponent } from '@feature/device/dialogs/modify-device-dialog/modify-device-dialog.component';
 import { ViewDeviceInfoDialogComponent } from '@feature/device/dialogs/view-device-info-dialog/view-device-info-dialog.component';
 import { NbDialogService } from '@nebular/theme';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'device-manage-page',
@@ -38,6 +40,11 @@ export class DeviceManagePageComponent implements OnInit {
     deviceName: new FormControl(),
     place: new FormControl(),
   });
+  pageParams: IPageParams = {
+    currentPage: 1,
+    perPage: 6,
+    total: 6
+  };
   constructor(
     private dialogService: NbDialogService,
     private deviceService: DeviceService
@@ -45,12 +52,39 @@ export class DeviceManagePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDeviceList();
+    this.onSearch();
   }
-
-  getDeviceList() {
-    const params = this.searchForm.getRawValue();
+  /**
+   * 監聽查詢
+   */
+   onSearch() {
+    this.searchForm.valueChanges.pipe(
+      debounceTime(300),
+    ).subscribe(() => {
+      this.pageParams.currentPage = 1;
+      this.getDeviceList();
+    });
+  }
+  /**
+   * 切換分頁
+   */
+  pageChange(currentPage) {
+    this.getDeviceList(currentPage);
+  }
+  /**
+   * 取得裝置清單
+   */
+  getDeviceList(currentPage = 1) {
+    const formData = this.searchForm.getRawValue();
+    const params = {
+      currentPage,
+      perPage: 6,
+      ...formData
+    };
     this.deviceService.getDeviceList(params).subscribe(res =>{
       this.deviceList = res.data;
+      this.pageParams = res.pageParams;
+      console.log(res);
     });
   }
 
