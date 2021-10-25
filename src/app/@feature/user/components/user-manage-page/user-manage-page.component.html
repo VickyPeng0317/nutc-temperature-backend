@@ -32,7 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of userList; index as i">
+          <tr *ngFor="let data of userList | paginate: (pageParams | paginationFormat);index as i">
             <td>{{ i + 1 }}</td>
             <td *ngFor="let col of columnList">
               <ng-container [ngSwitch]="col.key">
@@ -49,6 +49,9 @@
           </tr>
         </tbody>
       </table>
+      <div fxLayoutAlign="center">
+        <pagination-controls  previousLabel="上一頁" nextLabel="下一頁" (pageChange)="pageChange($event)"></pagination-controls>
+      </div>
     </div>
   </nb-card-body>
 </nb-card>

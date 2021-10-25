@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { IUserListItem } from '@core/services/user.service';
 import { NbDialogService } from '@nebular/theme';
 import { debounceTime } from 'rxjs/operators';
+import { IPageParams } from '@core/models/api-response';
 
 @Component({
   selector: 'user-manage-page',
@@ -39,7 +40,11 @@ export class UserManagePageComponent implements OnInit {
     userName: new FormControl(''),
   });
   userList: IUserListItem[] = [];
-
+  pageParams: IPageParams = {
+    currentPage: 1,
+    perPage: 6,
+    total: 6
+  };
   constructor(
     private dialogService: NbDialogService,
     private userService: UserService
@@ -50,17 +55,36 @@ export class UserManagePageComponent implements OnInit {
     this.onSearch();
   }
 
+  /**
+   * 監聽查詢
+   */
   onSearch() {
     this.searchForm.valueChanges.pipe(
-     debounceTime(300)
-    ).subscribe(() => this.getUserList());
+      debounceTime(300),
+    ).subscribe(() => {
+      this.pageParams.currentPage = 1;
+      this.getUserList();
+    });
   }
-
-  getUserList() {
-    this.userList = [];
-    const params = this.searchForm.getRawValue();
+  /**
+   * 切換分頁
+   */
+  pageChange(currentPage) {
+    this.getUserList(currentPage);
+  }
+  /**
+   * 取得使用者清單
+   */
+   getUserList(currentPage = 1) {
+    const formData = this.searchForm.getRawValue();
+    const params = {
+      currentPage,
+      perPage: '6',
+      ...formData
+    };
     this.userService.getUserList(params).subscribe(res => {
       this.userList = res.data;
+      this.pageParams = res.pageParams;
     });
   }
 }

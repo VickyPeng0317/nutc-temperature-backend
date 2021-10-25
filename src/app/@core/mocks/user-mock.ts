@@ -2,7 +2,7 @@ export const GetUserListMock = {
     pageParams: {
         perPage: 6,
         currentPage: 1,
-        total: 12
+        total: 30
     },
     data: [
         {
