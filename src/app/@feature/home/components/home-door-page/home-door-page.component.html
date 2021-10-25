@@ -1,5 +1,5 @@
 <div>
-    <nb-tabset (changeTab)="changeTab($event)">
+    <nb-tabset [hidden]="isLoading" (changeTab)="changeTab($event)">
         <nb-tab [active]="i === selectedTabIndex" *ngFor="let obs of (obsList|async) ;let i = index" tabTitle="{{obs.doorName}}">
             <div fxLayout="row wrap">
                 <div class="device-card" fxFlex="50" *ngFor="let device of obs.deviceList">
@@ -47,6 +47,10 @@
                     </nb-card>
                 </div>
             </div>
+        </nb-tab>
+    </nb-tabset>
+    <nb-tabset [hidden]="!isLoading" (changeTab)="changeTab($event)">
+        <nb-tab [active]="i === selectedTabIndex" *ngFor="let doorName of allDoorName ;let i = index" tabTitle="{{doorName}}">
         </nb-tab>
     </nb-tabset>
 </div>
