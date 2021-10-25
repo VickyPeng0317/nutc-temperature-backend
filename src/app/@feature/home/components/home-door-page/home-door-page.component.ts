@@ -4,7 +4,7 @@ import { DeviceService, IDeviceInfo } from '@core/services/device.service';
 import { IRecordInfo, RecordService } from '@core/services/record.service';
 import { forkJoin, from, interval, Observable, Subject, timer } from 'rxjs';
 import * as moment from 'moment';
-import { map, mergeMap, switchMap, takeUntil, tap, toArray } from 'rxjs/operators';
+import { finalize, map, mergeMap, switchMap, takeUntil, tap, toArray } from 'rxjs/operators';
 @Component({
   selector: 'home-door-page',
   templateUrl: './home-door-page.component.html',
@@ -13,6 +13,7 @@ import { map, mergeMap, switchMap, takeUntil, tap, toArray } from 'rxjs/operator
 export class HomeDoorPageComponent implements OnInit, OnDestroy {
   allDoorName = ['三民校區大門', '三民校區後門', '民生校區大門'];
   obsList = (new Observable()).pipe(map(_ => []));
+  cacheList = [];
   searchForm = new FormGroup({
     dateStart: new FormControl(
       moment().format('YYYY/MM/DD 00:00:00')
@@ -25,6 +26,7 @@ export class HomeDoorPageComponent implements OnInit, OnDestroy {
   COOL_NUM = 35.5;
   selectedTabIndex = 0;
   endSubject = new Subject();
+  isLoading = false;
   constructor(
     private deviceService: DeviceService,
     private recordService: RecordService
@@ -42,12 +44,17 @@ export class HomeDoorPageComponent implements OnInit, OnDestroy {
   }
 
   initData() {
+    this.isLoading = true;
     this.obsList = from(this.allDoorName).pipe(
       mergeMap(doorName => this.getDoorDeviceAndRecord(doorName)),
       toArray(),
       map(list => this.allDoorName.map(name => 
         list.find(x => x.doorName === name)
-      ))
+      )),
+      tap(list => {
+        this.cacheList = list;
+        this.isLoading = false;
+      })
     );
   }
 
