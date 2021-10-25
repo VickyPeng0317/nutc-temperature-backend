@@ -6,6 +6,7 @@ import { IUserListItem } from '@core/services/user.service';
 import { NbDialogService } from '@nebular/theme';
 import { debounceTime } from 'rxjs/operators';
 import { IPageParams } from '@core/models/api-response';
+import { ViewUserInfoDialogComponent } from '@feature/user/dialogs/view-user-info-dialog/view-user-info-dialog.component';
 
 @Component({
   selector: 'user-manage-page',
@@ -75,7 +76,7 @@ export class UserManagePageComponent implements OnInit {
   /**
    * 取得使用者清單
    */
-   getUserList(currentPage = 1) {
+  getUserList(currentPage = 1) {
     const formData = this.searchForm.getRawValue();
     const params = {
       currentPage,
@@ -86,5 +87,11 @@ export class UserManagePageComponent implements OnInit {
       this.userList = res.data;
       this.pageParams = res.pageParams;
     });
+  }
+  openInfoDialog(userId: number) {
+    const dialogData = {
+      context: { userId }
+    };
+    this.dialogService.open(ViewUserInfoDialogComponent, dialogData);
   }
 }

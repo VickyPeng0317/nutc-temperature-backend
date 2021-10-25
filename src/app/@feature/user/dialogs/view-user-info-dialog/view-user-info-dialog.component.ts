@@ -20,7 +20,7 @@ export class ViewUserInfoDialogComponent implements OnInit {
   ngOnInit(): void {
     const userId = this.userId;
     this.userService.getUserInfo({ userId }).subscribe(res => {
-      const isSuccess = !!res;
+      const isSuccess = !!res.userId;
       if (!isSuccess) {
         alert('取得失敗');
         this.dialogRef.close();

@@ -5,6 +5,11 @@
   <nb-card-body>
     <div fxLayout="column" fxLayoutGap="10px">
       <span>帳號: {{ userInfo.userAccount }} </span>
+      <span>姓名: {{ userInfo.userName }} </span>
+      <span>院: {{ userInfo.collegeName || '無' }} </span>
+      <span>部門/科系: {{ userInfo.departmentName || '無' }} </span>
+      <span>職稱/班級: {{ userInfo.departmentSubName || '無' }} </span>
+      <span>身分: {{ userInfo.identity === 'teacher' ? '老師' : '學生' }} </span>
     </div>
   </nb-card-body>
   <nb-card-footer fxLayoutAlign="end center" fxLayoutGap="5px">

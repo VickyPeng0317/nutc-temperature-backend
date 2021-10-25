@@ -28,6 +28,7 @@ export const GetUserListMock = {
 
 
 export const GetUserInfoMock = {
+    userId: 1,
     userAccount: "10430004",
     userName: "彭浚翔",
     collegeName: "資訊學院",

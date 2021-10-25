@@ -42,7 +42,7 @@
               </ng-container>
             </td>
             <td fxLayoutGap="5px">
-              <button status="basic" nbButton>檢視</button>
+              <button status="basic" nbButton (click)="openInfoDialog(data.userId)">檢視</button>
               <!-- <button (click)="openEditUserDialog(data.userAccount)" status="primary" nbButton>編輯</button>
               <button (click)="deleteUser(data.userAccount)" status="danger" nbButton>刪除</button> -->
             </td>

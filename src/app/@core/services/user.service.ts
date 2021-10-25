@@ -3,7 +3,7 @@ import { IPageReq, IPageRes } from '@core/models/api-response';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiAction, Post } from '@core/decorators/api-decorator';
-import { GetUserListMock, LoginMock } from '@core/mocks/user-mock';
+import { GetUserInfoMock, GetUserListMock, LoginMock } from '@core/mocks/user-mock';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class UserService extends BaseService{
 
   @Post({
     path: '/user/info',
-    mockData: GetUserListMock
+    mockData: GetUserInfoMock
   })
   getUserInfo: ApiAction<IGetUserInfoReq, IUserListItem>;
 
