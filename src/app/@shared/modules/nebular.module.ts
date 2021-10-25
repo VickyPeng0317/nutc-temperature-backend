@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbMomentDateModule } from '@nebular/moment';
 import { NbSecurityModule } from '@nebular/security';
-import { NbAccordionModule, NbActionsModule, NbAlertModule, NbAutocompleteModule, NbBadgeModule, NbButtonModule, NbCalendarModule, NbCardModule, NbCheckboxModule, NbContextMenuModule, NbDatepickerModule, NbFormFieldModule, NbIconModule, NbInputModule, NbLayoutModule, NbListModule, NbMenuModule, NbPopoverModule, NbRadioModule, NbSearchModule, NbSelectModule, NbSidebarModule, NbTabsetModule, NbToggleModule, NbTooltipModule, NbUserModule } from '@nebular/theme';
+import { NbAccordionModule, NbActionsModule, NbAlertModule, NbAutocompleteModule, NbBadgeModule, NbButtonModule, NbCalendarModule, NbCardModule, NbCheckboxModule, NbContextMenuModule, NbDatepickerModule, NbFormFieldModule, NbIconModule, NbInputModule, NbLayoutModule, NbListModule, NbMenuModule, NbPopoverModule, NbRadioModule, NbSearchModule, NbSelectModule, NbSidebarModule, NbSpinnerModule, NbTabsetModule, NbToggleModule, NbTooltipModule, NbUserModule } from '@nebular/theme';
 
 const NB_MODEL = [
   NbCardModule,
@@ -33,7 +33,8 @@ const NB_MODEL = [
   NbContextMenuModule,
   NbSecurityModule,
   NbEvaIconsModule,
-  NbBadgeModule
+  NbBadgeModule,
+  NbSpinnerModule
 ];
 
 @NgModule({

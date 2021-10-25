@@ -3,7 +3,7 @@
         <nb-tab [active]="i === selectedTabIndex" [lazyLoad]="true" *ngFor="let obs of (obsList|async) ;let i = index" tabTitle="{{obs.doorName}}">
             <div fxLayout="row wrap">
                 <div class="device-card" fxFlex="50" *ngFor="let device of obs.deviceList">
-                    <nb-card accent="info">
+                    <nb-card accent="info" [nbSpinner]="isLoading">
                         <nb-card-header fxLayoutAlign="start center" fxLayoutGap="10px">
                             <div class="card-header">
                                 <nb-icon icon="speaker"></nb-icon>
@@ -53,7 +53,7 @@
         <nb-tab [active]="i === selectedTabIndex" [lazyLoad]="true" *ngFor="let obs of cacheList ;let i = index" tabTitle="{{obs.doorName}}">
             <div fxLayout="row wrap">
                 <div class="device-card" fxFlex="50" *ngFor="let device of obs.deviceList">
-                    <nb-card accent="info">
+                    <nb-card accent="info" [nbSpinner]="isLoading">
                         <nb-card-header fxLayoutAlign="start center" fxLayoutGap="10px">
                             <div class="card-header">
                                 <nb-icon icon="speaker"></nb-icon>
