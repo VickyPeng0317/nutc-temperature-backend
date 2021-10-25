@@ -11,6 +11,8 @@ import { RequiredFormDirective } from './directives/required-form.directive';
 import { ChartsModule } from 'ng2-charts';
 import { FormRequiredComponent } from './components/form-required/form-required.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { PaginationFormatPipe } from './pipes/pagination-format.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const NB_MODEL = [
   NbCardModule,
@@ -55,7 +57,8 @@ const COMPONENTS = [
 @NgModule({
   declarations: [
     ...DIRECTIVES,
-    ...COMPONENTS
+    ...COMPONENTS,
+    PaginationFormatPipe
   ],
   imports: [
     NbDateFnsDateModule.forChild({}),
@@ -74,6 +77,8 @@ const COMPONENTS = [
     ...NB_MODEL,
     ...DIRECTIVES,
     ...COMPONENTS,
+    PaginationFormatPipe, 
+    NgxPaginationModule
   ]
 })
 export class SharedModule { }
