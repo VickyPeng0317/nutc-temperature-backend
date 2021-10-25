@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { IPageParams } from '@core/models/page-params';
 import { RecordService } from '@core/services/record.service';
+import * as moment from 'moment';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'record-manage-page',
@@ -31,20 +34,58 @@ export class RecordManagePageComponent implements OnInit {
     userName: new FormControl(),
     searchName: new FormControl(),
     type: new FormControl(),
-    dateRange: new FormControl(),
+    dateRange: new FormControl({
+      start: new Date(moment().format('YYYY/MM/DD 00:00:00')),
+      end: new Date(moment().format('YYYY/MM/DD 23:59:59'))
+    }),
   });
+  pageParams: IPageParams = {
+    currentPage: 1,
+    perPage: 6,
+    total: 6
+  };
   constructor(
     private recordService: RecordService
   ) { }
 
   ngOnInit(): void {
     this.getRecordList();
+    this.onSearch();
   }
-
-  getRecordList() {
-    const params = this.searchForm.getRawValue();
+  /**
+     * 監聽查詢
+     */
+  onSearch() {
+    this.searchForm.valueChanges.pipe(
+      debounceTime(300),
+    ).subscribe(() => {
+      this.pageParams.currentPage = 1;
+      this.getRecordList();
+    });
+  }
+  /**
+   * 切換分頁
+   */
+  pageChange(currentPage) {
+    this.getRecordList(currentPage);
+  }
+  /**
+   * 取得紀錄清單
+   */
+   getRecordList(currentPage = 1) {
+    const { dateRange, ...formData } = this.searchForm.getRawValue();
+    const dateStart = moment(dateRange.start).format('YYYY/MM/DD HH:mm:ss');
+    const dateEnd = moment(dateRange.end).format('YYYY/MM/DD HH:mm:ss');
+    const params = {
+      currentPage,
+      perPage: 6,
+      ...formData,
+      dateStart,
+      dateEnd
+    };
     this.recordService.getRecordList(params).subscribe(res => {
       this.recordList = res.data;
+      this.pageParams = res.pageParams;
     });
   }
 

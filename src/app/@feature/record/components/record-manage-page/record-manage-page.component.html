@@ -5,15 +5,29 @@
 </nb-card>
 
 <nb-card accent="info">
-  <nb-card-body fxLayout="row wrap" fxLayoutGap="10px">
+  <nb-card-body [formGroup]="searchForm" fxLayout="row" fxLayoutGap="10px">
     <div class="form-control" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
       <label class="label">使用者名稱</label>
-      <input type="text" nbInput fullWidth placeholder="請輸入使用者名稱">
+      <input formControlName="userName" type="text" nbInput fullWidth placeholder="請輸入使用者名稱">
     </div>
     <div class="form-control" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
-      <label class="label">機器名稱</label>
-      <input type="text" nbInput fullWidth placeholder="請輸入機器名稱">
+      <label class="label">院/部門/職稱/科系/班級</label>
+      <input formControlName="searchName" type="text" nbInput fullWidth placeholder="請輸入名稱">
     </div>
+    <div class="form-control" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
+      <label class="label">辨識結果</label>
+      <nb-select formControlName="type" fullWidth placeholder="請選擇辨識結果">
+        <nb-option value="">全部</nb-option>
+        <nb-option value="nornal">正常</nb-option>
+        <nb-option value="error">異常</nb-option>
+      </nb-select>
+    </div>
+    <div class="form-control" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
+      <label class="label">日期區間</label>
+      <input nbInput formControlName="dateRange" fullWidth [nbDatepicker]="rangepicker">
+      <nb-rangepicker format="yyyy/MM/dd" #rangepicker></nb-rangepicker>
+    </div>
+    
   </nb-card-body>
 </nb-card>
 
@@ -30,7 +44,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of recordList; index as i">
+          <tr *ngFor="let data of recordList | paginate: (pageParams | paginationFormat);index as i">
             <td>{{ i + 1 }}</td>
             <td *ngFor="let col of columnList">
               <ng-container [ngSwitch]="col.key">
@@ -45,6 +59,9 @@
           </tr>
         </tbody>
       </table>
+      <div fxLayoutAlign="center">
+        <pagination-controls  previousLabel="上一頁" nextLabel="下一頁" (pageChange)="pageChange($event)"></pagination-controls>
+      </div>
     </div>
   </nb-card-body>
 </nb-card>
