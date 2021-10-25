@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IPageParams } from '@core/models/page-params';
 import { RecordService } from '@core/services/record.service';
+import { StoreService } from '@core/services/store.service';
 import * as moment from 'moment';
 import { debounceTime } from 'rxjs/operators';
 
@@ -44,11 +45,15 @@ export class RecordManagePageComponent implements OnInit {
     perPage: 6,
     total: 6
   };
+  isStudent = false;
   constructor(
-    private recordService: RecordService
+    private recordService: RecordService,
+    private storeService: StoreService
   ) { }
 
   ngOnInit(): void {
+    const userInfo = this.storeService.getUserInfo();
+    this.isStudent = userInfo.identity === 'student';
     this.getRecordList();
     this.onSearch();
   }
@@ -76,13 +81,17 @@ export class RecordManagePageComponent implements OnInit {
     const { dateRange, ...formData } = this.searchForm.getRawValue();
     const dateStart = moment(dateRange.start).format('YYYY/MM/DD HH:mm:ss');
     const dateEnd = moment(dateRange.end).format('YYYY/MM/DD HH:mm:ss');
-    const params = {
+    let params = {
       currentPage,
       perPage: 6,
       ...formData,
       dateStart,
       dateEnd
     };
+    if (this.isStudent) {
+      const userInfo = this.storeService.getUserInfo();
+      params = { ...params, userId: userInfo.userId };
+    }
     this.recordService.getRecordList(params).subscribe(res => {
       this.recordList = res.data;
       this.pageParams = res.pageParams;

@@ -46,6 +46,6 @@ export const LoginMock = {
         collegeName: "資訊學院",
         departmentName: "資工系",
         departmentSubName: "專二",
-        identity: "student"
+        identity: "teacher"
     }
 };
