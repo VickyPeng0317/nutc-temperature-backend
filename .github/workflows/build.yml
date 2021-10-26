@@ -15,5 +15,4 @@ jobs:
           node-version: '14.18.1'
       - run: npm install
       - run: npm run build
-      # - run: Remove-Item C:\angular\* -Recurse
-      - run: cd dist ; Copy-Item C:\angular -Recurse -Force
+      - run: Copy-Item ./dist C:\angular -Recurse -Force
