@@ -15,8 +15,10 @@ jobs:
           node-version: '14.18.1'
       - run: npm install
       - name: Build dev
-        run: npm run build
-        run: Copy-Item ./dist C:\angular\backend-dev -Recurse -Force
+        run: |
+          npm run build
+          Copy-Item ./dist C:\angular\backend-dev -Recurse -Force
       - name: Build prod
-        run: npm run build:prod
-        run: Copy-Item ./dist C:\angular\backend-prod -Recurse -Force
+        run: |
+          npm run build:prod
+          Copy-Item ./dist C:\angular\backend-prod -Recurse -Force
