@@ -1,9 +1,7 @@
 name: CI
-​
 on:
   push:
     branches: [ master ]
-
 jobs:
     deploy:
         runs-on: tz-runner
