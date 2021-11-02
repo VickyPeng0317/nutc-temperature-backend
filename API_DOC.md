@@ -336,7 +336,6 @@ Request
     searchName?: "院/部門/職稱/科系/班級",
     userAccount?: "學生學號/老師EPortal帳號", <1101 彭 新增欄位>
     place?: "裝置地點", <1101 彭 新增欄位>
-    type?: "辨識結果 ('nornal': 正常, 'error': 異常)",
     dateStart?: "查詢時間起('YYYY/MM/DD HH:mm:ss')",
     dateEnd?: "查詢時間汔('YYYY/MM/DD HH:mm:ss')",
     perPage: "一頁幾筆(number)",
