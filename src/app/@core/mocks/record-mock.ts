@@ -14,7 +14,7 @@ export const GetRecordListMock = {
             userAccount: "10430004",
             collegeName: "資訊學院",
             departmentName: "資工系",
-            departmentSubName: "專案",
+            departmentSubName: "資工一甲",
             identity: "student",
             deviceId: 1,
             deviceName: "裝置名稱",

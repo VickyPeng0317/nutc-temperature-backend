@@ -11,17 +11,21 @@
       <input formControlName="userName" type="text" nbInput fullWidth placeholder="請輸入使用者名稱">
     </div>
     <div *ngIf="!isStudent" class="form-control" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
-      <label class="label">院/部門/職稱/科系/班級</label>
-      <input formControlName="searchName" type="text" nbInput fullWidth placeholder="請輸入名稱">
+      <label class="label">學號/帳號</label>
+      <input formControlName="userAccount" type="text" nbInput fullWidth placeholder="請輸入學號/帳號">
     </div>
-    <div class="form-control" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
+    <div *ngIf="!isStudent" class="form-control" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
+      <label class="label">地點</label>
+      <input formControlName="place" type="text" nbInput fullWidth placeholder="請輸入地點名稱">
+    </div>
+    <!-- <div class="form-control" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
       <label class="label">辨識結果</label>
       <nb-select formControlName="type" fullWidth placeholder="請選擇辨識結果">
         <nb-option value="">全部</nb-option>
         <nb-option value="nornal">正常</nb-option>
         <nb-option value="error">異常</nb-option>
       </nb-select>
-    </div>
+    </div> -->
     <div class="form-control" fxFlex="25" fxFlex.sm="100" fxFlex.xs="100">
       <label class="label">日期區間</label>
       <input nbInput formControlName="dateRange" fullWidth [nbDatepicker]="rangepicker">

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IPageParams } from '@core/models/page-params';
-import { RecordService } from '@core/services/record.service';
+import { IRecordInfo, RecordService } from '@core/services/record.service';
 import { StoreService } from '@core/services/store.service';
 import * as moment from 'moment';
 import { debounceTime } from 'rxjs/operators';
@@ -18,8 +18,12 @@ export class RecordManagePageComponent implements OnInit {
       name: '使用者名稱'
     },
     {
-      key: 'deviceName',
-      name: '裝置名稱'
+      key: 'departmentSubName',
+      name: '班級/部門'
+    },
+    {
+      key: 'place',
+      name: '地點'
     },
     {
       key: 'temperature',
@@ -30,10 +34,12 @@ export class RecordManagePageComponent implements OnInit {
       name: '建立時間'
     }
   ];
-  recordList = [];
+  recordList: IRecordInfo[] = [];
   searchForm = new FormGroup({
     userName: new FormControl(),
     searchName: new FormControl(),
+    userAccount: new FormControl(),
+    place: new FormControl(),
     type: new FormControl(),
     dateRange: new FormControl({
       start: new Date(moment().format('YYYY/MM/DD 00:00:00')),
