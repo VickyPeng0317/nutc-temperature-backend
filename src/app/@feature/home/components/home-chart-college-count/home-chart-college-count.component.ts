@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ICollegeCount } from '@core/services/record.service';
 import { ChartType } from 'chart.js';
 
 @Component({
@@ -8,7 +9,7 @@ import { ChartType } from 'chart.js';
 })
 export class HomeChartCollegeCountComponent implements OnChanges {
   @Input()
-  collegeCountList: any[] = [];
+  collegeCountList: ICollegeCount[] = [];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartOptions = {
@@ -26,14 +27,18 @@ export class HomeChartCollegeCountComponent implements OnChanges {
   ];
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes.recordList.currentValue) {
+    if (!changes.collegeCountList.currentValue) {
       return;
     }
     this.generateChart();
   }
   generateChart() {
-    // this.barChartLabels = allTime;
-    // this.barChartData[0].data = chartData;
+    const allCollegeName = this.collegeCountList.map(x => x.collegeName);
+    const allCollegeCount = this.collegeCountList.map(col => 
+      col.departmentCountList.reduce((res, item) => res + item.count, 0)
+    );
+    this.barChartLabels = allCollegeName;
+    this.barChartData[0].data = allCollegeCount;
   }
 
 }

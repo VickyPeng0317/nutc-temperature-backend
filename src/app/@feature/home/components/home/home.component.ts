@@ -3,7 +3,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { OtherService } from '@core/services/other.service';
-import { IRecordInfo, RecordService } from '@core/services/record.service';
+import { ICollegeCount, IRecordInfo, RecordService } from '@core/services/record.service';
 import * as moment from 'moment';
 import { Observable, of } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -14,7 +14,6 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
   searchForm = new FormGroup({
-    searchName: new FormControl(''),
     dateStart: new FormControl(
       new Date(moment().format('yyyy/MM/DD 00:00:00'))
     ),
@@ -23,45 +22,43 @@ export class HomeComponent implements OnInit {
     )
   });
   recordList: IRecordInfo[] = [];
-  allClegAndDep = [];
-  filteredOptions$: Observable<string[]>;
+  collegeCountList: ICollegeCount[] = [];
+  
   constructor(
-    private recordService: RecordService,
-    private otherService: OtherService
+    private recordService: RecordService
   ) {}
   
   ngOnInit(): void {
     this.getRecordListForStaff();
+    this.getCollegeCountList();
     this.onFormChange();
-    this.otherService.getAllClgeAndDep().subscribe(res => {
-      Object.keys(res).forEach(key => {
-        if (!res[key]) {
-          return;
-        }
-        this.allClegAndDep = [...this.allClegAndDep, ...res[key]];
-      });
-      this.filteredOptions$ = of(this.allClegAndDep);
-    });
   }
 
   onFormChange() {
-    this.searchForm.valueChanges.pipe(debounceTime(500)).subscribe((data) => {
-      const list = this.allClegAndDep.filter(x => x.includes(data.searchName));
-      this.filteredOptions$ = of(list);
+    this.searchForm.valueChanges.pipe(debounceTime(500)).subscribe(() => {
       this.getRecordListForStaff();
+      this.getCollegeCountList();
     });
   }
 
   getRecordListForStaff() {
     const searchFormData = this.searchForm.getRawValue();
-    const { searchName } = searchFormData;
     const dateStart = moment(searchFormData.dateStart).format('yyyy/MM/DD HH:mm:ss');
     const dateEnd = moment(searchFormData.dateEnd).format('yyyy/MM/DD HH:mm:ss');
-    const params = { searchName, dateStart, dateEnd };
+    const params = { searchName: '', dateStart, dateEnd };
     this.recordService.getRecordListForStaff(params).subscribe(res => {
       this.recordList = res.data;
     });
   }
 
+  getCollegeCountList() {
+    const searchFormData = this.searchForm.getRawValue();
+    const dateStart = moment(searchFormData.dateStart).format('yyyy/MM/DD HH:mm:ss');
+    const dateEnd = moment(searchFormData.dateEnd).format('yyyy/MM/DD HH:mm:ss');
+    const params = { dateStart, dateEnd };
+    this.recordService.getCollegeCountList(params).subscribe(res => {
+      this.collegeCountList = res.data;
+    });
+  }
 
 }
