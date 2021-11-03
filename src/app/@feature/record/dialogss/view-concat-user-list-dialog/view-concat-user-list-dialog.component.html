@@ -1,0 +1,43 @@
+<nb-card style="width: 60vw" [status]="'danger'">
+    <nb-card-header>
+        <h5 style="color: #ffffff;">
+            前後兩小時接觸人員清單
+        </h5>
+    </nb-card-header>
+    <nb-card-body>
+        <nb-list style="height: 600px;">
+            <nb-list-item fxLayout="row">
+                <div fxFlex="15%" style="font-weight: bold;">學號/帳號</div>
+                <div fxFlex="15%" style="font-weight: bold;">姓名</div>
+                <div fxFlex="15%" style="font-weight: bold;">班級/部門</div>
+                <div fxFlex="15%" style="font-weight: bold;">地點</div>
+                <div fxFlex="15%" style="font-weight: bold;">體溫</div>
+                <div fxFlex="15%" style="font-weight: bold;">時間</div>
+                <div fxFlex="15%" style="font-weight: bold;">功能</div>
+            </nb-list-item>
+            <nb-list-item fxLayout="row" *ngFor="let record of recordList">
+                <div fxFlex="15%">{{ record.userAccount }}</div>
+                <div fxFlex="15%">{{ record.userName }}</div>
+                <div fxFlex="15%">{{ record.departmentSubName }}</div>
+                <div fxFlex="15%">{{ record.place }}</div>
+                <div fxFlex="15%">{{ record.temperature }}</div>
+                <div fxFlex="15%">{{ record.createdTime | date:'HH:mm:ss' }}</div>
+                <div fxFlex="15%">
+                    <button (click)="breakSearch(record)" status="primary" nbButton>
+                        查看紀錄
+                    </button>
+                </div>
+            </nb-list-item>
+            <nb-list-item *ngIf="recordList.length === 0" fxLayoutAlign="center">
+                <span>無</span>
+            </nb-list-item>
+          </nb-list>
+    </nb-card-body>
+    <nb-card-footer fxLayoutAlign="space-between center" fxLayoutGap="5px">
+        <button nbButton status="success">
+            <nb-icon icon="file-text-outline"></nb-icon>
+            匯出Excel
+          </button>
+        <button (click)="close()" status="basic" nbButton>關閉</button>
+    </nb-card-footer>
+</nb-card>

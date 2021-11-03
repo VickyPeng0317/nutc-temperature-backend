@@ -3,6 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { IPageParams } from '@core/models/page-params';
 import { IRecordInfo, RecordService } from '@core/services/record.service';
 import { StoreService } from '@core/services/store.service';
+import { ViewConcatUserListDialogComponent } from '@feature/record/dialogss/view-concat-user-list-dialog/view-concat-user-list-dialog.component';
+import { NbDialogService } from '@nebular/theme';
 import * as moment from 'moment';
 import { debounceTime } from 'rxjs/operators';
 
@@ -14,8 +16,12 @@ import { debounceTime } from 'rxjs/operators';
 export class RecordManagePageComponent implements OnInit {
   columnList = [
     {
+      key: 'userAccount',
+      name: '學號/帳號'
+    },
+    {
       key: 'userName',
-      name: '使用者名稱'
+      name: '姓名'
     },
     {
       key: 'departmentSubName',
@@ -54,7 +60,8 @@ export class RecordManagePageComponent implements OnInit {
   isStudent = false;
   constructor(
     private recordService: RecordService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private dialogService: NbDialogService,
   ) { }
 
   ngOnInit(): void {
@@ -101,6 +108,23 @@ export class RecordManagePageComponent implements OnInit {
     this.recordService.getRecordList(params).subscribe(res => {
       this.recordList = res.data;
       this.pageParams = res.pageParams;
+    });
+  }
+
+  openConcatUserListDialog(recordInfo: IRecordInfo) {
+    const { createdTime, place } = recordInfo;
+    const dialogData = {
+      context: { createdTime, place }
+    };
+    const ref = this.dialogService.open(ViewConcatUserListDialogComponent, dialogData);
+    ref.onClose.subscribe((res: IRecordInfo) => {
+      if (!res) {
+        return;
+      }
+      const { userAccount, userName } = res;
+      this.searchForm.patchValue({
+        userAccount, userName, place: ''
+      });
     });
   }
 
