@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IRecordInfo } from '@core/services/record.service';
+import { environment } from '@environments/environment';
 import { ChartType } from 'chart.js';
 import * as moment from 'moment';
 
@@ -89,7 +90,7 @@ export class HomeChartHoursComponent implements OnInit, OnChanges {
     const chartData = allTime.map(time => {
       const count = this.recordList.filter(record => {
         const recordTime = moment(record.createdTime).format('HH:00');
-        return recordTime === time && +record.temperature > 37.3;
+        return recordTime === time && +record.temperature > environment.HOT;
       }).length;
       return count;
     });

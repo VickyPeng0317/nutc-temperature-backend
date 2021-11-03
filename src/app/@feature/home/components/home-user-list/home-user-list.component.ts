@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IRecordInfo } from '@core/services/record.service';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'home-user-list',
@@ -17,6 +18,6 @@ export class HomeUserListComponent implements OnChanges {
     if (!changes.recordList.currentValue) {
       return;
     }
-    this.showList = this.recordList.filter(x => +x.temperature > 37.3);
+    this.showList = this.recordList.filter(x => +x.temperature > environment.HOT);
   }
 }

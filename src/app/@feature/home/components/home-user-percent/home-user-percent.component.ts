@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IRecordInfo } from '@core/services/record.service';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'home-user-percent',
@@ -20,7 +21,7 @@ export class HomeUserPercentComponent implements OnInit, OnChanges {
     if (!changes.recordList.currentValue) {
       return;
     }
-    this.hotCount = this.recordList.filter(x => +x.temperature > 37.3).length;
+    this.hotCount = this.recordList.filter(x => +x.temperature > environment.HOT).length;
   }
   ngOnInit(): void {
   }

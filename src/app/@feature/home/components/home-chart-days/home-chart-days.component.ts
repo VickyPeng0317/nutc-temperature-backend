@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IRecordInfo, RecordService } from '@core/services/record.service';
+import { environment } from '@environments/environment';
 import { ChartOptions, ChartType } from 'chart.js';
 import * as moment from 'moment';
 
@@ -72,7 +73,7 @@ export class HomeChartDaysComponent implements OnInit, OnChanges {
       const chartData = allDay.map(time => {
         const count = recordList.filter(record => {
           const recordTime = moment(record.createdTime).format('YYYY/MM/DD');
-          return recordTime === time && +record.temperature > 37.3;
+          return recordTime === time && +record.temperature > environment.HOT;
         }).length;
         return count;
       });

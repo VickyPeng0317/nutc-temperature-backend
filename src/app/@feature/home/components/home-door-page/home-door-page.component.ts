@@ -5,6 +5,7 @@ import { IRecordInfo, RecordService } from '@core/services/record.service';
 import { forkJoin, from, interval, Observable, Subject, timer } from 'rxjs';
 import * as moment from 'moment';
 import { finalize, map, mergeMap, switchMap, takeUntil, tap, toArray } from 'rxjs/operators';
+import { environment } from '@environments/environment';
 @Component({
   selector: 'home-door-page',
   templateUrl: './home-door-page.component.html',
@@ -22,8 +23,8 @@ export class HomeDoorPageComponent implements OnInit, OnDestroy {
       moment().format('YYYY/MM/DD 23:59:59')
     )
   });
-  HOT_NUM = 37.3;
-  COOL_NUM = 35.5;
+  HOT_NUM = environment.HOT;
+  COOL_NUM = environment.COOL;
   selectedTabIndex = 0;
   endSubject = new Subject();
   isLoading = false;
