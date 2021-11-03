@@ -1,0 +1,18 @@
+<nb-card status="danger">
+    <nb-card-header style="font-size: 20px;">
+      <nb-icon icon="thermometer"></nb-icon>
+      各時段超標次數
+    </nb-card-header>
+    <nb-card-body>
+      <div style="display: block;width: 100%;">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+        </canvas>
+      </div>
+    </nb-card-body>
+  </nb-card>
+  
