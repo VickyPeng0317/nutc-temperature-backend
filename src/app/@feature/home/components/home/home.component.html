@@ -14,8 +14,8 @@
   <div class="chart-card" fxFlex="50" fxFlex.sm="100" fxFlex.xs="100">
     <home-chart-college-count [collegeCountList]="collegeCountList"></home-chart-college-count>
   </div>
-  <div class="chart-card" fxFlex="50" fxFlex.sm="100" fxFlex.xs="100" *ngFor="let item of collegeCountList">
-    <home-chart-department-count [collegeCountItem]="item"></home-chart-department-count>
+  <div class="chart-card" fxFlex="50" fxFlex.sm="100" fxFlex.xs="100" *ngFor="let item of collegeCountList; index as i">
+    <home-chart-department-count [collegeCountItem]="item" [index]="i"></home-chart-department-count>
   </div>
   <div class="chart-card" fxFlex="50" fxFlex.sm="100" fxFlex.xs="100">
     <home-chart-hours [recordList]="recordList"></home-chart-hours>

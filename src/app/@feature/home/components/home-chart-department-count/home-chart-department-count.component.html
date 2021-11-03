@@ -1,7 +1,7 @@
-<nb-card status="info">
-    <nb-card-header style="font-size: 20px;">
+<nb-card>
+    <nb-card-header style="font-size: 20px;" [ngStyle]="{'background-color': colorList[index]}">
       <nb-icon icon="thermometer"></nb-icon>
-      {{ collegeCountItem.collegeName }}感測人數統計
+      [{{ collegeCountItem.collegeName }}] 感測人數統計
     </nb-card-header>
     <nb-card-body>
       <div style="display: block;width: 100%;">
