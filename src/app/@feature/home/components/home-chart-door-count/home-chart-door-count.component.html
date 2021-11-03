@@ -1,1 +1,23 @@
-<p>home-chart-door-count works!</p>
+<nb-card status="warning">
+    <nb-card-header style="font-size: 20px; " fxLayoutAlign="space-between center">
+        <span>
+          <nb-icon icon="thermometer"></nb-icon>
+          大門各時段感測人數統計
+        </span>
+        <button nbButton status="success" shape="round" size="small" nbTooltip="匯出Excel" nbTooltipPlacement="top">
+          <nb-icon icon="file-text-outline"></nb-icon>
+        </button>
+      </nb-card-header>
+    <nb-card-body>
+      <div style="display: block;width: 100%;">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+        </canvas>
+      </div>
+    </nb-card-body>
+  </nb-card>
+  

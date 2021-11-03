@@ -1,7 +1,12 @@
 <nb-card>
-    <nb-card-header style="font-size: 20px;" [ngStyle]="{'background-color': colorList[index]}">
-      <nb-icon icon="thermometer"></nb-icon>
-      [{{ collegeCountItem.collegeName }}] 感測人數統計
+    <nb-card-header style="font-size: 20px;" [ngStyle]="{'background-color': colorList[index]}" fxLayoutAlign="space-between center">
+      <span>
+        <nb-icon icon="thermometer"></nb-icon>
+        [{{ collegeCountItem.collegeName }}] 感測人數統計
+      </span>
+      <button nbButton status="success" shape="round" size="small" nbTooltip="匯出Excel" nbTooltipPlacement="top">
+        <nb-icon icon="file-text-outline"></nb-icon>
+      </button>
     </nb-card-header>
     <nb-card-body>
       <div style="display: block;width: 100%;">

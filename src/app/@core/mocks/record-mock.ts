@@ -173,7 +173,7 @@ export const GerDoorCountListMock = (() => {
             const hourCountList = [];
             for (let i = 0; i < 24; i++) {
                 const hour = moment(`2021-11-03 ${i}:00`).format('HH:00');
-                const count = Math.floor(Math.random()*(200));
+                const count = Math.floor(Math.random()*(1500));
                 hourCountList.push({ hour, count });
             }
             return { doorName, hourCountList };
