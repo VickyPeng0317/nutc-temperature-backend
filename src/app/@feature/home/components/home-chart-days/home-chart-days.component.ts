@@ -10,17 +10,36 @@ import * as moment from 'moment';
 })
 export class HomeChartDaysComponent implements OnInit, OnChanges {
   barChartType: ChartType = 'line';
-
+  @Input()
+  isLoading = false;
   barChartOptions: ChartOptions = {
     responsive: true,
     legend: {
-      display: true,
+      display: false,
       position: 'bottom',
       labels: {
         fontSize: 10,
         usePointStyle: true
       }
-    }
+    },
+    scales: {
+      yAxes: [{
+        scaleLabel: {
+          display: true,
+          labelString: '人數'
+        },
+        display: true,
+        ticks: {
+          min: 0
+        }
+      }],
+      xAxes: [{
+        scaleLabel: {
+          display: true,
+          labelString: '日期'
+        }
+      }]
+    },
   };
 
   barChartLabels = ['10/01', '10/02', '10/03', '10/04', '10/05', '10/06', '10/07'];

@@ -24,6 +24,9 @@ export class HomeComponent implements OnInit {
   recordList: IRecordInfo[] = [];
   collegeCountList: ICollegeCount[] = [];
   doorCountList: IDoorCount[] = [];
+  isLoadingRecord = false;
+  isLoadingCollege = false;
+  isLoadingDoor = false;
   constructor(
     private recordService: RecordService
   ) {}
@@ -44,31 +47,37 @@ export class HomeComponent implements OnInit {
   }
 
   getRecordListForStaff() {
+    this.isLoadingRecord = true;
     const searchFormData = this.searchForm.getRawValue();
     const dateStart = moment(searchFormData.dateStart).format('yyyy/MM/DD HH:mm:ss');
     const dateEnd = moment(searchFormData.dateEnd).format('yyyy/MM/DD HH:mm:ss');
     const params = { searchName: '', dateStart, dateEnd };
     this.recordService.getRecordListForStaff(params).subscribe(res => {
+      this.isLoadingRecord = false;
       this.recordList = res.data;
     });
   }
 
   getCollegeCountList() {
+    this.isLoadingCollege = true;
     const searchFormData = this.searchForm.getRawValue();
     const dateStart = moment(searchFormData.dateStart).format('yyyy/MM/DD HH:mm:ss');
     const dateEnd = moment(searchFormData.dateEnd).format('yyyy/MM/DD HH:mm:ss');
     const params = { dateStart, dateEnd };
     this.recordService.getCollegeCountList(params).subscribe(res => {
+      this.isLoadingCollege = false;
       this.collegeCountList = res.data;
     });
   }
 
   getDoorCountList() {
+    this.isLoadingDoor = true;
     const searchFormData = this.searchForm.getRawValue();
     const dateStart = moment(searchFormData.dateStart).format('yyyy/MM/DD HH:mm:ss');
     const dateEnd = moment(searchFormData.dateEnd).format('yyyy/MM/DD HH:mm:ss');
     const params = { dateStart, dateEnd };
     this.recordService.getDoorCountList(params).subscribe(res => {
+      this.isLoadingDoor = false;
       this.doorCountList = res.data;
     });
   }

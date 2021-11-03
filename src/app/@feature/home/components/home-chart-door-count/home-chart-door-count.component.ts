@@ -11,6 +11,8 @@ import * as moment from 'moment';
 export class HomeChartDoorCountComponent implements OnChanges {
   @Input()
   doorCountList: IDoorCount[] = [];
+  @Input()
+  isLoading = false;
   colorList = ['#FFA1B5','#89C7F0','#FDE29B','#93D9DB','#C0D6E3','#FED3A6','#FF8D9C','#94D8D7','#9498A3'];
   barChartType: ChartType = 'line';
   barChartLegend = true;
@@ -47,7 +49,7 @@ export class HomeChartDoorCountComponent implements OnChanges {
       xAxes: [{
         scaleLabel: {
           display: true,
-          labelString: '時'
+          labelString: '時間'
         },
       }]
     }

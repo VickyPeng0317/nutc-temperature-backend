@@ -9,6 +9,8 @@ import { IRecordInfo } from '@core/services/record.service';
 export class HomeUserPercentComponent implements OnInit, OnChanges {
   @Input()
   recordList: IRecordInfo[] = [];
+  @Input()
+  isLoading = false;
   hotCount = 0;
   get percent () {
     return (this.hotCount/this.recordList.length)*100;

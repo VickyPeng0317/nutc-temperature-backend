@@ -9,6 +9,8 @@ import { IRecordInfo } from '@core/services/record.service';
 export class HomeUserListComponent implements OnChanges {
   @Input()
   recordList: IRecordInfo[] = [];
+  @Input()
+  isLoading = false;
   showList: IRecordInfo[] = [];
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {

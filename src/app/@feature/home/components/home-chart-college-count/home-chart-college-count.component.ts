@@ -10,6 +10,8 @@ import { ChartType } from 'chart.js';
 export class HomeChartCollegeCountComponent implements OnChanges {
   @Input()
   collegeCountList: ICollegeCount[] = [];
+  @Input()
+  isLoading = false;
   colorList = ['#FFA1B5','#89C7F0','#FDE29B','#93D9DB','#C0D6E3','#FED3A6','#FF8D9C','#94D8D7','#9498A3'];
   barChartType: ChartType = 'bar';
   barChartLegend = false;

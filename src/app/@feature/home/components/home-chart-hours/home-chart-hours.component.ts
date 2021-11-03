@@ -11,14 +11,54 @@ import * as moment from 'moment';
 export class HomeChartHoursComponent implements OnInit, OnChanges {
   @Input()
   recordList: IRecordInfo[] = [];
-  
+  @Input()
+  isLoading = false;
   barChartType: ChartType = 'bar';
 
   barChartOptions = {
     responsive: true,
+    scales: {
+      yAxes: [{
+        scaleLabel: {
+          display: true,
+          labelString: '人數'
+        },
+        display: true,
+        ticks: {
+          min: 0
+        }
+      }],
+      xAxes: [{
+        scaleLabel: {
+          display: true,
+          labelString: '時間'
+        }
+      }]
+    },
+    hover: {
+      animationDuration: 1
+    },
+    animation: {
+      duration: 1,
+      onComplete: function () {
+        var chartInstance = this.chart,
+          ctx = chartInstance.ctx;
+          ctx.textAlign = 'center';
+          ctx.fillStyle = "rgba(0, 0, 0, 1)";
+          ctx.textBaseline = 'bottom';
+        // Loop through each data in the datasets
+        this.data.datasets.forEach(function (dataset, i) {
+          var meta = chartInstance.controller.getDatasetMeta(i);
+          meta.data.forEach(function (bar, index) {
+            var data = dataset.data[index];
+            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+          });
+        });
+      }
+    }
   };
 
-  barChartLegend = true;
+  barChartLegend = false;
 
   barChartLabels = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'];
   barChartData = [
