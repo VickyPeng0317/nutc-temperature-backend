@@ -79,7 +79,7 @@ export class HomeChartDaysComponent implements OnInit, OnChanges {
         return count;
       });
       this.barChartData[0].data = chartData;
-      this.barChartOptions.scales.yAxes[0].ticks.max = Math.max(...chartData) + 5;
+      this.barChartOptions.scales.yAxes[0].ticks.max = Math.round(Math.max(...chartData) * 1.5);
     });
   }
   ngOnInit(): void {

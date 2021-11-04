@@ -83,6 +83,6 @@ export class HomeChartDepartmentCountComponent implements OnChanges {
     const allDepartmentCount = this.collegeCountItem.departmentCountList.map(dep => dep.count);
     this.barChartLabels = allDepartmentName;
     this.barChartData[0].data = allDepartmentCount;
-    this.barChartOptions.scales.yAxes[0].ticks.max =  allDepartmentCount.length === 0 ? 0 : Math.max(...allDepartmentCount) + 1;
+    this.barChartOptions.scales.yAxes[0].ticks.max =  allDepartmentCount.length === 0 ? 0 : Math.round(Math.max(...allDepartmentCount) * 1.5);
   }
 }

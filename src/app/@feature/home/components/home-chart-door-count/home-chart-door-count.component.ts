@@ -95,7 +95,7 @@ export class HomeChartDoorCountComponent implements OnChanges {
     this.barChartLabels = allHour;
     this.barChartData = barChartData;
     const barChartOptions = JSON.parse(JSON.stringify(this.barChartOptions));
-    barChartOptions.scales.yAxes[0].ticks.max = barChartData.length === 0 ? 0 : max + 1;
+    barChartOptions.scales.yAxes[0].ticks.max = barChartData.length === 0 ? 0 : Math.round(max * 1.5);
     this.barChartOptions = barChartOptions;
   }
 

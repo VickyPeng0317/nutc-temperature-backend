@@ -40,7 +40,7 @@ export class HomeChartCollegeCountComponent implements OnChanges {
     );
     this.barChartLabels = allCollegeName;
     this.barChartData[0].data = allCollegeCount;
-    const max = allCollegeCount.length === 0 ? 0 : Math.max(...allCollegeCount) + 1;
+    const max = allCollegeCount.length === 0 ? 0 : Math.round(Math.max(...allCollegeCount) * 1.5);
     this.barChartOptions = this.getOption(max);
   }
 
