@@ -41,10 +41,10 @@ export class HomeChartDoorCountComponent implements OnChanges {
             display: false
         },
         display: true,
-        // ticks: {
-        //   max: 2000,
-        //   min: 0
-        // }
+        ticks: {
+          stepSize: 1,
+          min: 0
+        }
       }],
       xAxes: [{
         scaleLabel: {
@@ -73,8 +73,14 @@ export class HomeChartDoorCountComponent implements OnChanges {
     const allHour = this.doorCountList[0].hourCountList.map(x => 
       moment(`2021-11-03 ${x.hour}`).format('H')
     );
+    let max = 0;
     const barChartData = this.doorCountList.map((door, index) => {
-      const data = door.hourCountList.map(x => x.count);
+      const data = door.hourCountList.map(x => {
+        if (x.count > max) {
+          max = x.count;
+        }
+        return x.count;
+      });
       const label = door.doorName;
       const color = this.colorList[index];
       return {
@@ -88,6 +94,9 @@ export class HomeChartDoorCountComponent implements OnChanges {
     });
     this.barChartLabels = allHour;
     this.barChartData = barChartData;
+    const barChartOptions = JSON.parse(JSON.stringify(this.barChartOptions));
+    barChartOptions.scales.yAxes[0].ticks.max = barChartData.length === 0 ? 0 : max + 1;
+    this.barChartOptions = barChartOptions;
   }
 
 }

@@ -24,7 +24,7 @@ export class DeviceManagePageComponent implements OnInit {
     },
     {
       key: 'place',
-      name: '位置'
+      name: '地點'
     },
     {
       key: 'status',

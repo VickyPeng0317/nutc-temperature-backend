@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IRecordInfo } from '@core/services/record.service';
 import { environment } from '@environments/environment';
-import { ChartType } from 'chart.js';
+import { ChartOptions, ChartType } from 'chart.js';
 import * as moment from 'moment';
 
 @Component({
@@ -16,48 +16,7 @@ export class HomeChartHoursComponent implements OnInit, OnChanges {
   isLoading = false;
   barChartType: ChartType = 'bar';
 
-  barChartOptions = {
-    responsive: true,
-    scales: {
-      yAxes: [{
-        scaleLabel: {
-          display: true,
-          labelString: '人數'
-        },
-        display: true,
-        ticks: {
-          min: 0
-        }
-      }],
-      xAxes: [{
-        scaleLabel: {
-          display: true,
-          labelString: '時間'
-        }
-      }]
-    },
-    hover: {
-      animationDuration: 1
-    },
-    animation: {
-      duration: 1,
-      onComplete: function () {
-        var chartInstance = this.chart,
-          ctx = chartInstance.ctx;
-          ctx.textAlign = 'center';
-          ctx.fillStyle = "rgba(0, 0, 0, 1)";
-          ctx.textBaseline = 'bottom';
-        // Loop through each data in the datasets
-        this.data.datasets.forEach(function (dataset, i) {
-          var meta = chartInstance.controller.getDatasetMeta(i);
-          meta.data.forEach(function (bar, index) {
-            var data = dataset.data[index];
-            ctx.fillText(data, bar._model.x, bar._model.y - 5);
-          });
-        });
-      }
-    }
-  };
+  barChartOptions: ChartOptions = {};
 
   barChartLegend = false;
 
@@ -96,6 +55,53 @@ export class HomeChartHoursComponent implements OnInit, OnChanges {
     });
     this.barChartLabels = allTime;
     this.barChartData[0].data = chartData;
+    const max = chartData.length === 0 ? 0 : Math.max(...chartData) + 1;
+    this.barChartOptions = this.getOption(max);
   }
-
+  getOption(max) {
+    return {
+      responsive: true,
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: '人數'
+          },
+          display: true,
+          ticks: {
+            stepSize: 1,
+            min: 0,
+            max
+          }
+        }],
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: '時間'
+          }
+        }]
+      },
+      hover: {
+        animationDuration: 1
+      },
+      animation: {
+        duration: 1,
+        onComplete: function () {
+          var chartInstance = this.chart,
+            ctx = chartInstance.ctx;
+            ctx.textAlign = 'center';
+            ctx.fillStyle = "rgba(0, 0, 0, 1)";
+            ctx.textBaseline = 'bottom';
+          // Loop through each data in the datasets
+          this.data.datasets.forEach(function (dataset, i) {
+            var meta = chartInstance.controller.getDatasetMeta(i);
+            meta.data.forEach(function (bar, index) {
+              var data = dataset.data[index];
+              ctx.fillText(data, bar._model.x, bar._model.y - 5);
+            });
+          });
+        }
+      }
+    }
+  }
 }

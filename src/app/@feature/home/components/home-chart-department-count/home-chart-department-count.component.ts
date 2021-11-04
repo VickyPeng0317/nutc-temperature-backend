@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ICollegeCount } from '@core/services/record.service';
-import { ChartType } from 'chart.js';
+import { ChartOptions, ChartType } from 'chart.js';
 
 @Component({
   selector: 'home-chart-department-count',
@@ -20,7 +20,7 @@ export class HomeChartDepartmentCountComponent implements OnChanges {
   colorList = ['#FFA1B5', '#89C7F0', '#FDE29B', '#93D9DB', '#C0D6E3', '#FED3A6', '#FF8D9C', '#94D8D7', '#9498A3'];
   barChartType: ChartType = 'bar';
   barChartLegend = false;
-  barChartOptions = {
+  barChartOptions: ChartOptions = {
     responsive: true,
     scales: {
       yAxes: [{
@@ -33,6 +33,7 @@ export class HomeChartDepartmentCountComponent implements OnChanges {
         },
         display: true,
         ticks: {
+          stepSize: 1,
           max: 500,
           min: 0
         }
@@ -82,5 +83,6 @@ export class HomeChartDepartmentCountComponent implements OnChanges {
     const allDepartmentCount = this.collegeCountItem.departmentCountList.map(dep => dep.count);
     this.barChartLabels = allDepartmentName;
     this.barChartData[0].data = allDepartmentCount;
+    this.barChartOptions.scales.yAxes[0].ticks.max =  allDepartmentCount.length === 0 ? 0 : Math.max(...allDepartmentCount) + 1;
   }
 }

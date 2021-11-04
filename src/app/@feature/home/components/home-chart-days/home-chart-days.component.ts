@@ -31,6 +31,7 @@ export class HomeChartDaysComponent implements OnInit, OnChanges {
         },
         display: true,
         ticks: {
+          stepSize: 1,
           min: 0
         }
       }],
@@ -78,6 +79,7 @@ export class HomeChartDaysComponent implements OnInit, OnChanges {
         return count;
       });
       this.barChartData[0].data = chartData;
+      this.barChartOptions.scales.yAxes[0].ticks.max = Math.max(...chartData) + 5;
     });
   }
   ngOnInit(): void {
