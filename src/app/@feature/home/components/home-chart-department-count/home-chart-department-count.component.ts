@@ -72,7 +72,7 @@ export class HomeChartDepartmentCountComponent implements OnChanges {
   ];
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes.collegeCountItem.currentValue) {
+    if (!changes?.collegeCountItem?.currentValue) {
       return;
     }
     this.generateChart();

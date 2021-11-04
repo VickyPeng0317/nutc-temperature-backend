@@ -61,12 +61,15 @@ export class HomeChartDoorCountComponent implements OnChanges {
   ngOnInit(): void {
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes.doorCountList.currentValue) {
+    if (!changes?.doorCountList?.currentValue) {
       return;
     }
     this.generateChart();
   }
   generateChart() {
+    if (this.doorCountList.length === 0) {
+      return;
+    }
     const allHour = this.doorCountList[0].hourCountList.map(x => 
       moment(`2021-11-03 ${x.hour}`).format('H')
     );
