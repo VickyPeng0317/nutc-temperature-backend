@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IPageParams } from '@core/models/page-params';
+import { ExportService } from '@core/services/export.service';
 import { IRecordInfo, RecordService } from '@core/services/record.service';
 import { StoreService } from '@core/services/store.service';
 import { ViewConcatUserListDialogComponent } from '@feature/record/dialogss/view-concat-user-list-dialog/view-concat-user-list-dialog.component';
@@ -17,27 +18,33 @@ export class RecordManagePageComponent implements OnInit {
   columnList = [
     {
       key: 'userAccount',
-      name: '學號/帳號'
+      name: '學號/帳號',
+      width: '10%'
     },
     {
       key: 'userName',
-      name: '姓名'
+      name: '姓名',
+      width: '10%'
     },
     {
       key: 'departmentSubName',
-      name: '班級/部門'
+      name: '班級/部門',
+      width: '10%'
     },
     {
       key: 'place',
-      name: '地點'
+      name: '地點',
+      width: '10%'
     },
     {
       key: 'temperature',
-      name: '體溫'
+      name: '體溫',
+      width: '10%'
     },
     {
       key: 'createdTime',
-      name: '建立時間'
+      name: '建立時間',
+      width: '15%'
     }
   ];
   recordList: IRecordInfo[] = [];
@@ -62,6 +69,7 @@ export class RecordManagePageComponent implements OnInit {
     private recordService: RecordService,
     private storeService: StoreService,
     private dialogService: NbDialogService,
+    private exportService: ExportService
   ) { }
 
   ngOnInit(): void {
@@ -125,6 +133,20 @@ export class RecordManagePageComponent implements OnInit {
       this.searchForm.patchValue({
         userAccount, userName, place: ''
       });
+    });
+  }
+
+  exportExcel() {
+    const { dateRange, ...formData } = this.searchForm.getRawValue();
+    const dateStart = moment(dateRange.start).format('YYYY/MM/DD HH:mm:ss');
+    const dateEnd = moment(dateRange.end).format('YYYY/MM/DD HH:mm:ss');
+    const params = { dateStart, dateEnd, ...formData };
+    this.recordService.getRecordListAll(params).subscribe(res => {
+      const recordList = res.data;
+      const { userName = '', userAccount = ''} = formData;
+      const hasUserNameOrAccount = !!userName || !!userAccount;
+      const fileName = `${userAccount || ''}${userName || ''}${hasUserNameOrAccount ? '_' : ''}辨識紀錄_${moment().format('MMDD-HHmm')}`;
+      this.exportService.exportExcell(recordList, this.columnList, fileName);
     });
   }
 
