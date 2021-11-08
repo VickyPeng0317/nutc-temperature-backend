@@ -100,8 +100,8 @@ export class RecordManagePageComponent implements OnInit {
    */
    getRecordList(currentPage = 1) {
     const { dateRange, ...formData } = this.searchForm.getRawValue();
-    const dateStart = moment(dateRange.start).format('YYYY/MM/DD HH:mm:ss');
-    const dateEnd = moment(dateRange.end).format('YYYY/MM/DD HH:mm:ss');
+    const dateStart = moment(dateRange.start).format('YYYY/MM/DD 00:00:00');
+    const dateEnd = moment(dateRange.end).format('YYYY/MM/DD 23:59:59');
     let params = {
       currentPage,
       perPage: 6,
@@ -128,9 +128,13 @@ export class RecordManagePageComponent implements OnInit {
       if (!res) {
         return;
       }
-      const { userAccount, userName } = res;
+      const { userAccount, userName, createdTime } = res;
+      const dateRange = {
+        start: new Date(moment(createdTime).format('YYYY/MM/DD 00:00:00')),
+        end: new Date(moment(createdTime).format('YYYY/MM/DD 23:59:59'))
+      };
       this.searchForm.patchValue({
-        userAccount, userName, place: ''
+        userAccount, userName, place: '', dateRange
       });
     });
   }

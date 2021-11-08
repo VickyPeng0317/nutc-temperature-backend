@@ -1,27 +1,30 @@
 <nb-card style="width: 70vw" [status]="'danger'">
     <nb-card-header>
         <h5 style="color: #ffffff;">
-            前後兩小時接觸清單 - {{'['+recordInfo.userAccount + ']' + ' ' + recordInfo.userName + '  ' + recordInfo.createdTime }}
+            前後兩小時接觸清單
         </h5>
     </nb-card-header>
     <nb-card-body>
+        <p class="warning-label" style="font-weight: bold; font-size: 16px; color: #ffffff;">
+            來源: {{'['+recordInfo.userAccount + ']' + ' ' + recordInfo.userName + ' ' + recordInfo.place + ' ' + recordInfo.createdTime }}
+        </p>
         <nb-list style="height: 600px;">
             <nb-list-item fxLayout="row">
-                <div fxFlex="15%" style="font-weight: bold;">學號/帳號</div>
-                <div fxFlex="15%" style="font-weight: bold;">姓名</div>
-                <div fxFlex="15%" style="font-weight: bold;">班級/部門</div>
+                <div fxFlex="13%" style="font-weight: bold;">學號/帳號</div>
+                <div fxFlex="13%" style="font-weight: bold;">姓名</div>
+                <div fxFlex="13%" style="font-weight: bold;">班級/部門</div>
                 <div fxFlex="15%" style="font-weight: bold;">地點</div>
-                <div fxFlex="15%" style="font-weight: bold;">體溫</div>
-                <div fxFlex="15%" style="font-weight: bold;">時間</div>
+                <div fxFlex="13%" style="font-weight: bold;">體溫</div>
+                <div fxFlex="28%" style="font-weight: bold;">時間</div>
                 <div fxFlex="15%" style="font-weight: bold;">功能</div>
             </nb-list-item>
             <nb-list-item fxLayout="row" *ngFor="let record of recordList">
-                <div fxFlex="15%">{{ record.userAccount }}</div>
-                <div fxFlex="15%">{{ record.userName }}</div>
-                <div fxFlex="15%">{{ record.departmentSubName }}</div>
+                <div fxFlex="13%">{{ record.userAccount }}</div>
+                <div fxFlex="13%">{{ record.userName }}</div>
+                <div fxFlex="13%">{{ record.departmentSubName }}</div>
                 <div fxFlex="15%">{{ record.place }}</div>
-                <div fxFlex="15%">{{ record.temperature }}</div>
-                <div fxFlex="15%">{{ record.createdTime | date:'HH:mm:ss' }}</div>
+                <div fxFlex="13%">{{ record.temperature }}</div>
+                <div fxFlex="28%">{{ record.createdTime | date:'YYYY-MM-dd HH:mm:ss' }}</div>
                 <div fxFlex="15%">
                     <button (click)="breakSearch(record)" status="primary" nbButton>
                         查看紀錄
