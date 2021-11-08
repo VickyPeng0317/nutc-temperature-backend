@@ -1,7 +1,7 @@
-<nb-card style="width: 60vw" [status]="'danger'">
+<nb-card style="width: 70vw" [status]="'danger'">
     <nb-card-header>
         <h5 style="color: #ffffff;">
-            前後兩小時接觸人員清單
+            前後兩小時接觸清單 - {{'['+recordInfo.userAccount + ']' + ' ' + recordInfo.userName + '  ' + recordInfo.createdTime }}
         </h5>
     </nb-card-header>
     <nb-card-body>
@@ -34,7 +34,7 @@
           </nb-list>
     </nb-card-body>
     <nb-card-footer fxLayoutAlign="space-between center" fxLayoutGap="5px">
-        <button nbButton status="success">
+        <button nbButton status="success" (click)="exportExcel()">
             <nb-icon icon="file-text-outline"></nb-icon>
             匯出Excel
           </button>

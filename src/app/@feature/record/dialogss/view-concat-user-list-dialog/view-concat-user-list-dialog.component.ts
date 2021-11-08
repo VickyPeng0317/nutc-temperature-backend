@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ExportService } from '@core/services/export.service';
 import { IRecordInfo, RecordService } from '@core/services/record.service';
 import { NbDialogRef } from '@nebular/theme';
+import * as moment from 'moment';
 
 @Component({
   selector: 'view-concat-user-list-dialog',
@@ -9,20 +11,17 @@ import { NbDialogRef } from '@nebular/theme';
 })
 export class ViewConcatUserListDialogComponent implements OnInit {
   @Input()
-  createdTime: string;
-  @Input()
-  place: string;
+  recordInfo: IRecordInfo = {} as IRecordInfo;
   recordList: IRecordInfo[] = [];
   constructor(
     protected dialogRef: NbDialogRef<ViewConcatUserListDialogComponent>,
-    private recordService: RecordService
+    private recordService: RecordService,
+    private exportService: ExportService
   ) { }
 
   ngOnInit(): void {
-    const params = {
-      createdTime: this.createdTime,
-      place: this.place
-    };
+    const { createdTime,  place } = this.recordInfo;
+    const params = { createdTime,  place };
     this.recordService.getContactList(params).subscribe(res => {
       this.recordList = res.data;
     });
@@ -34,6 +33,44 @@ export class ViewConcatUserListDialogComponent implements OnInit {
 
   close() {
     this.dialogRef.close();
+  }
+
+  exportExcel() {
+    const columnList = [
+      {
+        key: 'userAccount',
+        name: '學號/帳號',
+        width: '10%'
+      },
+      {
+        key: 'userName',
+        name: '姓名',
+        width: '10%'
+      },
+      {
+        key: 'departmentSubName',
+        name: '班級/部門',
+        width: '10%'
+      },
+      {
+        key: 'place',
+        name: '地點',
+        width: '10%'
+      },
+      {
+        key: 'temperature',
+        name: '體溫',
+        width: '10%'
+      },
+      {
+        key: 'createdTime',
+        name: '建立時間',
+        width: '15%'
+      }
+    ];
+    const { userName, userAccount, createdTime} = this.recordInfo;
+    const fileName = `${userAccount}${userName}_接觸清單_${moment(createdTime).format('MMDDHHmm')}`;
+    this.exportService.exportExcell(this.recordList, columnList, fileName);
   }
 
 }

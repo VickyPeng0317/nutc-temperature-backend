@@ -120,9 +120,8 @@ export class RecordManagePageComponent implements OnInit {
   }
 
   openConcatUserListDialog(recordInfo: IRecordInfo) {
-    const { createdTime, place } = recordInfo;
     const dialogData = {
-      context: { createdTime, place }
+      context: { recordInfo }
     };
     const ref = this.dialogService.open(ViewConcatUserListDialogComponent, dialogData);
     ref.onClose.subscribe((res: IRecordInfo) => {
@@ -145,7 +144,7 @@ export class RecordManagePageComponent implements OnInit {
       const recordList = res.data;
       const { userName = '', userAccount = ''} = formData;
       const hasUserNameOrAccount = !!userName || !!userAccount;
-      const fileName = `${userAccount || ''}${userName || ''}${hasUserNameOrAccount ? '_' : ''}辨識紀錄_${moment().format('MMDD-HHmm')}`;
+      const fileName = `${userAccount || ''}${userName || ''}${hasUserNameOrAccount ? '_' : ''}辨識紀錄_${moment().format('MMDDHHmm')}`;
       this.exportService.exportExcell(recordList, this.columnList, fileName);
     });
   }
