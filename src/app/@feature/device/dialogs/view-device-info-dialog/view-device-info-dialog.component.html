@@ -16,11 +16,20 @@
             <qrcode [qrdata]="qrCodeData" [width]="250" [errorCorrectionLevel]="'M'"></qrcode>
             <span>{{ deviceInfo.place }}</span>
         </div>
-        
+        <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
+          <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="10px">
+            <button nbButton status="info" (mouseup)="stopSubject.next()" (mousedown)="modifyQrcodeImgArea('up')"><nb-icon icon="arrow-up"></nb-icon></button>
+            <button nbButton status="info" (mouseup)="stopSubject.next()" (mousedown)="modifyQrcodeImgArea('down')"><nb-icon icon="arrow-down"></nb-icon></button>
+            <button nbButton status="info" (mouseup)="stopSubject.next()" (mousedown)="modifyQrcodeImgArea('left')"><nb-icon icon="arrow-left"></nb-icon></button>
+            <button nbButton status="info" (mouseup)="stopSubject.next()" (mousedown)="modifyQrcodeImgArea('right')"><nb-icon icon="arrow-right"></nb-icon></button>
+            <button nbButton status="success" (mouseup)="stopSubject.next()" (mousedown)="modifyQrcodeImgArea('maximize')"><nb-icon icon="maximize"></nb-icon></button>
+            <button nbButton status="danger" (mouseup)="stopSubject.next()" (mousedown)="modifyQrcodeImgArea('minimize')"><nb-icon icon="minimize"></nb-icon></button>
+          </div>
+          <canvas #deviceCanvas></canvas>
+        </div>
       </div>
     </nb-card-body>
     <nb-card-footer fxLayoutAlign="end center" fxLayoutGap="5px">
       <button (click)="close()" status="basic" nbButton>關閉</button>
     </nb-card-footer>
   </nb-card>
-  
