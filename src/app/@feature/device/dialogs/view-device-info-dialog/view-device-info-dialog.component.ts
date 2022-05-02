@@ -1,22 +1,29 @@
-import { takeUntil, tap } from 'rxjs/operators';
+import { element } from 'protractor';
+import { takeUntil, tap, delay } from 'rxjs/operators';
 import { Subject, timer, interval } from 'rxjs';
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { DeviceService, IDeviceInfo } from '@core/services/device.service';
 import { NbDialogRef } from '@nebular/theme';
+import { ta } from 'date-fns/locale';
 
 @Component({
   selector: 'view-device-info-dialog',
   templateUrl: './view-device-info-dialog.component.html',
   styleUrls: ['./view-device-info-dialog.component.scss']
 })
-export class ViewDeviceInfoDialogComponent implements OnInit, AfterViewInit  {
+export class ViewDeviceInfoDialogComponent implements OnInit  {
   @ViewChild("deviceCanvas")
   deviceCanvas: ElementRef<HTMLCanvasElement>;
   public context: CanvasRenderingContext2D;
+
+  @ViewChild("qrcodeRef")
+  qrcodeRef: any;
+  qrCodeData: string = 'null';
+
   @Input()
   deviceId: number;
   deviceInfo: IDeviceInfo = <IDeviceInfo>{};
-  qrCodeData: string = 'null';
+
   qrCodeArea = {
     x: 267,
     y: 189,
@@ -26,12 +33,7 @@ export class ViewDeviceInfoDialogComponent implements OnInit, AfterViewInit  {
   constructor(
     private deviceService: DeviceService,
     protected dialogRef: NbDialogRef<ViewDeviceInfoDialogComponent>,
-    ) { }
-  ngAfterViewInit(): void {
-    this.context = this.deviceCanvas.nativeElement.getContext('2d');
-    this.initDeviceImg();
-    this.initQrcodeImg();
-  }
+  ) { }
   initDeviceImg() {
     const deviceImage = new Image();
     deviceImage.src = 'assets/img/mmhg.png';
@@ -39,12 +41,12 @@ export class ViewDeviceInfoDialogComponent implements OnInit, AfterViewInit  {
       const { width, height } = deviceImage;
       this.deviceCanvas.nativeElement.width = width;
       this.deviceCanvas.nativeElement.height = height;
-      this.context.drawImage(deviceImage, 0, 0, width, height)
+      this.context.drawImage(deviceImage, 0, 0, width, height);
     };
   }
   initQrcodeImg() {
     const qrcodeImage = new Image();
-    qrcodeImage.src = 'assets/img/qrcode.png';
+    qrcodeImage.src = this.getQrcodeImageBASE64();
     qrcodeImage.onload = () => {
       // const canvasWidth = this.deviceCanvas.nativeElement.width;
       // const canvasHeight = this.deviceCanvas.nativeElement.height;
@@ -61,7 +63,7 @@ export class ViewDeviceInfoDialogComponent implements OnInit, AfterViewInit  {
         tap(() => this.initDeviceImg()),
         tap(() => {
           const qrcodeImage = new Image();
-          qrcodeImage.src = 'assets/img/qrcode.png';
+          qrcodeImage.src = this.getQrcodeImageBASE64();
           qrcodeImage.onload = () => {
             this.setQrcodeArea(type, qrcodeImage);
             const { x, y, size } = this.qrCodeArea;
@@ -73,7 +75,6 @@ export class ViewDeviceInfoDialogComponent implements OnInit, AfterViewInit  {
         takeUntil(this.stopSubject),
       ).subscribe()
   }
-
   setQrcodeArea(type: string, qrcodeImage: HTMLImageElement) {
     const typeLogic = [
       {
@@ -116,10 +117,28 @@ export class ViewDeviceInfoDialogComponent implements OnInit, AfterViewInit  {
     typeLogic.find(item => item.logic)?.action();
   }
   ngOnInit(): void {
-    this.deviceService.getDeviceInfo({ deviceId: this.deviceId }).subscribe(res => {
-      this.deviceInfo = res;
-      this.qrCodeData = JSON.stringify(res);
-    });
+    const params = { deviceId: this.deviceId };
+    this.deviceService.getDeviceInfo(params).pipe(
+      tap((res) => {
+        this.deviceInfo = res;
+        this.qrCodeData = JSON.stringify({ deviceId: this.deviceId });
+      }),
+      delay(500),
+      tap(() => {
+        this.context = this.deviceCanvas.nativeElement.getContext('2d');
+        this.initDeviceImg();
+      }),
+      delay(500),
+      tap(() => {
+        this.initQrcodeImg()
+      }),
+    ).subscribe();
+  }
+
+  getQrcodeImageBASE64() {
+    return this.qrcodeRef.qrcElement.nativeElement
+        .querySelector("canvas")
+        .toDataURL("image/png");
   }
   close() {
     this.dialogRef.close();

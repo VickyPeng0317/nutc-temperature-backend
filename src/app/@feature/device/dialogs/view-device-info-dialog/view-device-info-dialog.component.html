@@ -11,11 +11,12 @@
         <span>維修專線: {{ deviceInfo.maintainCall }} </span>
         <span>狀態: {{ deviceInfo.status }} </span>
         <span>辨識方式: {{ deviceInfo.type }} </span>
-        <span>QRCode</span>
+        <span>QRCode:</span>
         <div fxLayout="column" fxLayoutAlign="center center">
-            <qrcode [qrdata]="qrCodeData" [width]="250" [errorCorrectionLevel]="'M'"></qrcode>
-            <span>{{ deviceInfo.place }}</span>
+            <qrcode #qrcodeRef [qrdata]="qrCodeData" [width]="100" [errorCorrectionLevel]="'M'" [elementType]="'canvas'"></qrcode>
         </div>
+        <span>QRCode 位置設定:</span>
+        <qrcode [hidden]="true" #qrcodeRef [qrdata]="qrCodeData" [width]="150" [errorCorrectionLevel]="'M'" [elementType]="'canvas'"></qrcode>
         <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
           <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="10px">
             <button nbButton status="info" (mouseup)="stopSubject.next()" (mousedown)="modifyQrcodeImgArea('up')"><nb-icon icon="arrow-up"></nb-icon></button>
